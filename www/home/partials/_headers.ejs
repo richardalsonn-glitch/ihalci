@@ -29,11 +29,69 @@
       <link rel="stylesheet" href="/home/css/font-awesome-pro.css">
       <link rel="stylesheet" href="/home/css/default.css">
       <link rel="stylesheet" href="/home/css/style.css">
-
       <link rel="stylesheet" href="/home/css/urunler.css">
 
       <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 
+      <style>
+        .header-wallet-wrap{
+          display:flex;
+          justify-content:flex-end;
+          align-items:center;
+          gap:10px;
+          flex-wrap:wrap;
+        }
+        .header-balance-box{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          padding:8px 14px;
+          border-radius:10px;
+          font-weight:700;
+          line-height:1;
+          box-shadow:0 4px 12px rgba(0,0,0,0.12);
+          transition:all .2s ease;
+          white-space:nowrap;
+        }
+        .header-balance-box:hover{
+          transform:translateY(-2px);
+        }
+        .header-balance-tl{
+          background:#fff;
+          color:#222;
+        }
+        .header-balance-jeton{
+          background:#ff8c1a;
+          color:#fff;
+        }
+        .header-balance-link{
+          background:#222;
+          color:#fff !important;
+          text-decoration:none;
+        }
+        .header-action{
+          display:flex;
+          justify-content:flex-end;
+          align-items:center;
+          gap:12px;
+          flex-wrap:wrap;
+          margin-left:0 !important;
+        }
+        @media (max-width:991px){
+          .header__search{
+            margin-left:0 !important;
+            width:100% !important;
+          }
+          .header__search-box .search-input{
+            width:100% !important;
+            padding-left:15px !important;
+          }
+          .header-action,
+          .header-wallet-wrap{
+            justify-content:center;
+          }
+        }
+      </style>
 
    </head>
    <body>
@@ -189,13 +247,28 @@
                             <% } %>
                         </div>
 
+                        <!-- YENİ BAKİYE KUTUSU -->
+                        <div class="header-wallet-wrap">
+                            <div class="header-balance-box header-balance-tl">
+                                💰 <% if(cuzdan){ %><%- cuzdan.bakiye %><% } else { %>0<% } %> TL
+                            </div>
+
+                            <div class="header-balance-box header-balance-jeton">
+                                🪙 <% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %> Jeton
+                            </div>
+
+                            <a href="/bakiye" class="header-balance-box header-balance-link">
+                                + Yükle
+                            </a>
+                        </div>
+
                         <!-- BAKİYE -->
                         <div class="block-wishlist action">
                             <a class="icon-link icon-link-2" href="/bakiye">
                                 <i class="flaticon-heart"></i>
                                 <span class="count count-2">0</span>
                                 <span class="text">
-                                    <span class="sub">Bakiye Ekle</span>
+                                <span class="sub">Bakiye Ekle</span>
                                 </span>
                             </a>
                         </div>
@@ -221,9 +294,10 @@
         </div>
     </div>
 </div>
+
         <div class="header__bottom d-none d-lg-block">
-       
         </div> 
+
         <div class="header__bottom">
             <div class="container custom-conatiner">
                 <div class="row g-0 align-items-center">
@@ -239,14 +313,9 @@
                                                 <ul class="mega-menu">
                                                     <li><a href="">Kategoriler </a>
                                                         <ul class="mega-item">
-                                                            
-                                                         
                                                             <li><a href="bekle">bekle</a></li>
-                                                           
-                                                          
                                                         </ul>
                                                     </li>
-                                                    
                                                 </ul>
                                             </li>
                                             <% kategoriler.forEach(kategori => { %>
@@ -273,82 +342,88 @@
                         <div class="side-menu d-lg-none mr-20">
                           <button type="button" class="side-menu-btn offcanvas-toggle-btn"><i class="fas fa-bars"></i></button>
                         </div>
-                     <div class="main-menu d-none d-lg-block">
-    <nav>
-        <ul>
 
-            <!-- ANASAYFA -->
-            <li>
-                <a href="/" class="active">Anasayfa</a>
-            </li>
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul>
 
-            <!-- İHALELER -->
-           <li class="mega-parent">
-    <a href="/ihaleler">İhaleler</a>
+                                    <!-- ANASAYFA -->
+                                    <li>
+                                        <a href="/" class="active">Anasayfa</a>
+                                    </li>
 
-    <div class="mega-menu-custom">
+                                    <!-- İHALELER -->
+                                    <li class="mega-parent">
+                                        <a href="/ihaleler">İhaleler</a>
 
-        <div class="mega-col">
-            <h6>İhale Türleri</h6>
-            <a href="/ihaleler">Tüm İhaleler</a>
-            <a href="/canli-ihaleler">🔥 Canlı İhaleler</a>
-            <a href="/yaklasan-ihaleler">⏳ Yaklaşan</a>
-            <a href="/biten-ihaleler">✔ Biten</a>
+                                        <div class="mega-menu-custom">
+                                            <div class="mega-col">
+                                                <h6>İhale Türleri</h6>
+                                                <a href="/ihaleler">Tüm İhaleler</a>
+                                                <a href="/canli-ihaleler">🔥 Canlı İhaleler</a>
+                                                <a href="/yaklasan-ihaleler">⏳ Yaklaşan</a>
+                                                <a href="/biten-ihaleler">✔ Biten</a>
+                                            </div>
+
+                                            <div class="mega-col">
+                                                <h6>Öne Çıkanlar</h6>
+                                                <a href="#">⚡ En Çok Teklif Alan</a>
+                                                <a href="#">💰 En Ucuz Kazanılan</a>
+                                                <a href="#">🔥 Trend İhaleler</a>
+                                            </div>
+
+                                            <div class="mega-col">
+                                                <h6>Kazananlar</h6>
+                                                <a href="/kazananlar">🏆 Son Kazananlar</a>
+                                                <a href="#">📊 Büyük Kazançlar</a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <!-- ÜRÜNLER -->
+                                    <li>
+                                        <a href="/urunler">Ürünler <i class="far fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/urunler">Tüm Ürünler</a></li>
+                                            <li><a href="/kategoriler/telefon">📱 Telefon</a></li>
+                                            <li><a href="/kategoriler/kulaklik">🎧 Kulaklık</a></li>
+                                            <li><a href="/kategoriler/oyun-konsolu">🎮 Oyun Konsolu</a></li>
+                                            <li><a href="/kategoriler/kucuk-ev-aletleri">🏠 Ev Aletleri</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- HAKKIMIZDA -->
+                                    <li>
+                                        <a href="/hakkimizda">Hakkımızda</a>
+                                    </li>
+
+                                    <!-- BLOG -->
+                                    <li>
+                                        <a href="/blog">Blog <i class="far fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/blog">Tüm Yazılar</a></li>
+                                            <li><a href="/blog/ihale-rehberi">İhale Rehberi</a></li>
+                                            <li><a href="/blog/jeton-nasil-kullanilir">Jeton Nasıl Kullanılır?</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- İLETİŞİM -->
+                                    <li>
+                                        <a href="/iletisim">İletişim</a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </div>
+                      </div>
+                    </div>
+                   
+                </div>
+            </div>
         </div>
-
-        <div class="mega-col">
-            <h6>Öne Çıkanlar</h6>
-            <a href="#">⚡ En Çok Teklif Alan</a>
-            <a href="#">💰 En Ucuz Kazanılan</a>
-            <a href="#">🔥 Trend İhaleler</a>
-        </div>
-
-        <div class="mega-col">
-            <h6>Kazananlar</h6>
-            <a href="/kazananlar">🏆 Son Kazananlar</a>
-            <a href="#">📊 Büyük Kazançlar</a>
-        </div>
-
-    </div>
-</li>
-
-            <!-- ÜRÜNLER -->
-            <li>
-                <a href="/urunler">Ürünler <i class="far fa-angle-down"></i></a>
-                <ul class="submenu">
-                    <li><a href="/urunler">Tüm Ürünler</a></li>
-                    <li><a href="/kategoriler/telefon">📱 Telefon</a></li>
-                    <li><a href="/kategoriler/kulaklik">🎧 Kulaklık</a></li>
-                    <li><a href="/kategoriler/oyun-konsolu">🎮 Oyun Konsolu</a></li>
-                    <li><a href="/kategoriler/kucuk-ev-aletleri">🏠 Ev Aletleri</a></li>
-                </ul>
-            </li>
-
-            <!-- HAKKIMIZDA -->
-            <li>
-                <a href="/hakkimizda">Hakkımızda</a>
-            </li>
-
-            <!-- BLOG -->
-            <li>
-                <a href="/blog">Blog <i class="far fa-angle-down"></i></a>
-                <ul class="submenu">
-                    <li><a href="/blog">Tüm Yazılar</a></li>
-                    <li><a href="/blog/ihale-rehberi">İhale Rehberi</a></li>
-                    <li><a href="/blog/jeton-nasil-kullanilir">Jeton Nasıl Kullanılır?</a></li>
-                </ul>
-            </li>
-
-            <!-- İLETİŞİM -->
-            <li>
-                <a href="/iletisim">İletişim</a>
-            </li>
-
-        </ul>
-    </nav>
-</div>
      </header>
      <!-- header-end -->
+
       <!-- offcanvas area start -->
     <div class="offcanvas__area">
         <div class="offcanvas__wrapper">
