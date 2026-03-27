@@ -1,3 +1,4 @@
+index.2
 <%- include('../partials/_headers'); %>
 <link rel="stylesheet" href="/home/css/css/bootstrap.min.css">
 <link rel="stylesheet" href="/home/css/css/jquery-ui.css">
@@ -16,39 +17,25 @@
     <section class="live-auction-page" style="padding:40px 0;background:#f5f5f5;">
         <div class="container">
 
+            <!-- ÜST BÖLÜM -->
             <div class="row" style="display:flex;flex-wrap:wrap;gap:25px;align-items:stretch;">
 
-                <!-- SOL CANLI İHALE -->
+                <!-- CANLI İHALE -->
                 <div class="col-lg-8" style="flex:2;min-width:320px;">
-                    <div style="background:#fff;border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(0,0,0,0.08);height:100%;position:relative;z-index:1;">
-
+                    <div style="background:#fff;border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(0,0,0,0.08);height:100%;">
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
                             <div>
                                 <span style="background:#ff8c1a;color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;">🔴 CANLI İHALE</span>
                             </div>
-                            <div style="font-size:16px;font-weight:600;color:#444;background:#fff;padding:4px 8px;border-radius:8px;">
+                            <div style="font-size:16px;font-weight:600;color:#444;">
                                 Kalan Süre:
                                 <span id="auction-timer" style="color:#ff7a00;font-size:20px;">00:09:42</span>
                             </div>
                         </div>
 
-                        <div style="display:flex;gap:25px;flex-wrap:wrap;align-items:flex-start;">
-
-                            <div style="flex:1;min-width:260px;">
-                                <div style="text-align:center;margin-bottom:18px;">
-                                    <img src="/slider/461761.jpg" alt="Canlı ihale ürünü" style="max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#fafafa;padding:15px;">
-                                </div>
-
-                                <div style="background:#fafafa;border-radius:12px;padding:18px;">
-                                    <h4 style="font-size:20px;font-weight:700;color:#222;margin-bottom:12px;">İhale Bilgileri</h4>
-                                    <ul style="margin:0;padding-left:18px;color:#555;line-height:1.8;">
-                                        <li>İhale başlangıç saati: 14:30</li>
-                                        <li>Son 10 saniyede teklif gelirse süre +10 saniye uzar</li>
-                                        <li>Katılım için minimum 300 jeton gereklidir</li>
-                                        <li>Her yeni teklif sistemde anlık güncellenir</li>
-                                        <li>Kazanan kullanıcı satın alma hakkı kazanır</li>
-                                    </ul>
-                                </div>
+                        <div style="display:flex;gap:25px;flex-wrap:wrap;align-items:center;">
+                            <div style="flex:1;min-width:260px;text-align:center;">
+                                <img src="/slider/461761.jpg" alt="Canlı ihale ürünü" style="max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#fafafa;padding:15px;">
                             </div>
 
                             <div style="flex:1;min-width:280px;">
@@ -56,8 +43,8 @@
                                 <p style="color:#777;font-size:16px;margin-bottom:15px;">256 GB • Titanyum • Kapalı Kutu</p>
 
                                 <div style="margin-bottom:18px;">
-                                    <div style="font-size:14px;color:#888;">Anlık Fiyat</div>
-                                    <div style="font-size:40px;font-weight:800;color:#222;" id="live-price">145 TL</div>
+                                <div style="font-size:14px;color:#888;">Anlık Fiyat</div>
+                                <div style="font-size:40px;font-weight:800;color:#222;" id="live-price">145 TL</div>
                                 </div>
 
                                 <div style="display:grid;grid-template-columns:repeat(2,minmax(140px,1fr));gap:14px;margin-bottom:20px;">
@@ -65,43 +52,18 @@
                                         <div style="font-size:13px;color:#888;">İhale Giriş Bedeli</div>
                                         <div style="font-size:20px;font-weight:700;color:#ff7a00;">300 Jeton</div>
                                     </div>
-
-                                    <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
-                                        <div style="font-size:13px;color:#888;">Son Jeton Teklifi</div>
-                                        <div style="font-size:20px;font-weight:700;color:#ff7a00;">310 Jeton</div>
-                                    </div>
-
                                     <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
                                         <div style="font-size:13px;color:#888;">Toplam Teklif</div>
                                         <div style="font-size:22px;font-weight:700;color:#222;">186</div>
                                     </div>
-
                                     <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
                                         <div style="font-size:13px;color:#888;">Katılımcı</div>
                                         <div style="font-size:22px;font-weight:700;color:#222;">42 Kişi</div>
                                     </div>
-
                                     <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
                                         <div style="font-size:13px;color:#888;">Son Teklif Veren</div>
                                         <div style="font-size:22px;font-weight:700;color:#222;">Ali***</div>
                                     </div>
-
-                                    <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
-                                        <div style="font-size:13px;color:#888;">Anlık Durum</div>
-                                        <div style="font-size:20px;font-weight:700;color:#28a745;">Aktif</div>
-                                    </div>
-                                </div>
-
-                                <div style="background:#fafafa;border-radius:12px;padding:18px;margin-bottom:20px;">
-                                    <h4 style="font-size:20px;font-weight:700;color:#222;margin-bottom:12px;">Ürün Detayları</h4>
-                                    <ul style="margin:0;padding-left:18px;color:#555;line-height:1.8;">
-                                        <li>Model: iPhone 15 Pro Max</li>
-                                        <li>Depolama: 256 GB</li>
-                                        <li>Renk: Natural Titanium</li>
-                                        <li>Durum: Kapalı kutu / sıfır ürün</li>
-                                        <li>Garanti: 24 ay resmi distribütör garantili</li>
-                                        <li>Kutu içeriği: Orijinal kutu ve aksesuarlar</li>
-                                    </ul>
                                 </div>
 
                                 <div style="display:flex;gap:12px;flex-wrap:wrap;">
@@ -109,14 +71,14 @@
                                     <a href="/jetonlarim" style="background:#222;color:#fff;padding:14px 24px;border-radius:10px;font-weight:700;display:inline-block;text-decoration:none;">JETONLARIM</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
                 <!-- SAĞ PANEL -->
-                <div class="col-lg-4" style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:20px;position:relative;z-index:1;">
+                <div class="col-lg-4" style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:20px;">
 
+                    <!-- SIRADAKİ İHALE -->
                     <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
                         <h3 style="font-size:24px;font-weight:700;margin-bottom:18px;color:#222;">Sıradaki İhale</h3>
                         <img src="/slider/461761.jpg" alt="Sıradaki ihale" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;margin-bottom:15px;">
@@ -127,6 +89,7 @@
                         <a href="/yaklasan-ihaleler" style="background:#ff8c1a;color:#fff;padding:12px 18px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:700;">DETAYI GÖR</a>
                     </div>
 
+                    <!-- JETON PAKETLERİ -->
                     <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
                         <h3 style="font-size:24px;font-weight:700;margin-bottom:18px;color:#222;">Jeton Paketleri</h3>
 
@@ -158,9 +121,104 @@
 
                         <a href="/bakiye" style="margin-top:16px;background:#222;color:#fff;padding:12px 18px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:700;">JETON YÜKLE</a>
                     </div>
-
                 </div>
             </div>
+
+            <!-- POPÜLER İHALELER -->
+            <div style="margin-top:35px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+                    <h2 style="font-size:30px;font-weight:700;color:#222;margin:0;">Popüler İhaleler</h2>
+                    <a href="/ihaleler" style="color:#ff8c1a;font-weight:700;text-decoration:none;">Tümünü Gör</a>
+                </div>
+
+                <div class="row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+                    <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+                        <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+                        <h4 style="margin-top:15px;font-size:22px;font-weight:700;">PS5 Slim</h4>
+                        <p style="color:#777;">Kalan Süre: <strong>00:05:11</strong></p>
+                        <p style="color:#777;">Anlık Fiyat: <strong style="color:#ff8c1a;">98 TL</strong></p>
+                        <p style="color:#777;">İhale Giriş Bedeli: <strong>220 Jeton</strong></p>
+                        <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+                    </div>
+
+                    <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+                        <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+                        <h4 style="margin-top:15px;font-size:22px;font-weight:700;">Dyson V15</h4>
+                        <p style="color:#777;">Kalan Süre: <strong>00:11:44</strong></p>
+                        <p style="color:#777;">Anlık Fiyat: <strong style="color:#ff8c1a;">74 TL</strong></p>
+                        <p style="color:#777;">İhale Giriş Bedeli: <strong>180 Jeton</strong></p>
+                        <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+                    </div>
+
+                    <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+                        <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+                        <h4 style="margin-top:15px;font-size:22px;font-weight:700;">Apple Watch</h4>
+                        <p style="color:#777;">Kalan Süre: <strong>00:07:26</strong></p>
+                        <p style="color:#777;">Anlık Fiyat: <strong style="color:#ff8c1a;">52 TL</strong></p>
+                        <p style="color:#777;">İhale Giriş Bedeli: <strong>160 Jeton</strong></p>
+                        <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+                    </div>
+
+                    <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+                        <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+                        <h4 style="margin-top:15px;font-size:22px;font-weight:700;">AirPods Max</h4>
+                        <p style="color:#777;">Kalan Süre: <strong>00:13:50</strong></p>
+                        <p style="color:#777;">Anlık Fiyat: <strong style="color:#ff8c1a;">81 TL</strong></p>
+                        <p style="color:#777;">İhale Giriş Bedeli: <strong>195 Jeton</strong></p>
+                        <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POPÜLER ÜRÜNLER + SON KAZANANLAR -->
+            <div class="row" style="display:grid;grid-template-columns:2fr 1fr;gap:25px;margin-top:35px;">
+                <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+                    <h2 style="font-size:30px;font-weight:700;color:#222;margin-bottom:18px;">Popüler Ürünler</h2>
+
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+                        <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+                            <h5 style="font-size:20px;font-weight:700;">Telefon</h5>
+                            <p style="color:#777;margin:0;">12 aktif ihale</p>
+                        </div>
+                        <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+                            <h5 style="font-size:20px;font-weight:700;">Kulaklık</h5>
+                            <p style="color:#777;margin:0;">8 aktif ihale</p>
+                        </div>
+                        <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+                            <h5 style="font-size:20px;font-weight:700;">Oyun Konsolu</h5>
+                            <p style="color:#777;margin:0;">5 aktif ihale</p>
+                        </div>
+                        <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+                            <h5 style="font-size:20px;font-weight:700;">Küçük Ev Aleti</h5>
+                            <p style="color:#777;margin:0;">9 aktif ihale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+                    <h2 style="font-size:28px;font-weight:700;color:#222;margin-bottom:18px;">Son Kazananlar</h2>
+
+                    <div style="display:flex;flex-direction:column;gap:14px;">
+                        <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+                            <strong>Meh***</strong>
+                            <div style="font-size:14px;color:#777;">AirPods Pro 2 • 84 TL</div>
+                        </div>
+                        <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+                            <strong>Ayş***</strong>
+                            <div style="font-size:14px;color:#777;">iPhone 15 • 162 TL</div>
+                        </div>
+                        <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+                            <strong>Bur***</strong>
+                            <div style="font-size:14px;color:#777;">PS5 Slim • 123 TL</div>
+                        </div>
+                        <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+                            <strong>Can***</strong>
+                            <div style="font-size:14px;color:#777;">Dyson V15 • 91 TL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
     <!-- hero end -->
@@ -285,7 +343,7 @@
                                                 </h2>
                                                 <h4 class="product__price">
                                                     <span class="Yeni"><%- urunler[j].baslangicfiyati %> TL</span>
-                                                    <span class="old"><%- urunler[j].urunfiyati %> TL </span>
+                                                    <span class="old"><%- urunler[j].urunfiyati %> TL</span>
                                                 </h4>
                                             </div>
                                             <ul class="product__action">
@@ -312,39 +370,25 @@
         <div class="container">
             <div class="brand__active">
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_01.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_01.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_02.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_02.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_03.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_03.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_04.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_04.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_05.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_05.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_06.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_06.png" alt=""></a>
                 </div>
                 <div class="brand__item">
-                    <a href="#!">
-                        <img src="/home/img/img/brand/img_03.png" alt="">
-                    </a>
+                    <a href="#!"><img src="/home/img/img/brand/img_03.png" alt=""></a>
                 </div>
             </div>
         </div>
