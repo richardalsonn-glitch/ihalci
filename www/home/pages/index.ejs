@@ -1,195 +1,163 @@
 <%- include('../partials/_headers'); %>
 
-<!-- ====================== TAILWIND + MODERN TASARIM ====================== -->
+<!-- ====================== SADECE TAILWIND + MODERN TASARIM ====================== -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
 <style>
-  .tail-container { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
+  body {
+    font-family: 'Inter', system_ui, sans-serif;
+  }
+  
   .product-card {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
   }
   .product-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 25px 50px -12px rgb(249 115 22 / 0.25);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
-  .countdown {
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 1px;
-  }
+  
   .hero-bg {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
   }
 </style>
 
-<body class="tail-container bg-gray-50">
+<body class="bg-gray-50">
 
-<main>
-
-  <!-- ==================== NAVBAR ==================== -->
-  <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- NAVBAR -->
+  <nav class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-bold text-orange-600">İhale<span class="text-gray-800">ci</span></h1>
+        <span class="text-3xl font-bold text-orange-600">İhale<span class="text-gray-900">ci</span></span>
       </div>
-      
-      <div class="flex items-center gap-8">
-        <a href="/" class="font-medium hover:text-orange-600 transition">Ana Sayfa</a>
-        <a href="/kategoriler/kadin" class="font-medium hover:text-orange-600 transition">Kategoriler</a>
-        <a href="/urun-ekle" class="font-medium hover:text-orange-600 transition">İhale Başlat</a>
-        
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="/" class="hover:text-orange-600 transition">Ana Sayfa</a>
+        <a href="/kategoriler/kadin" class="hover:text-orange-600 transition">Kategoriler</a>
+        <a href="/urun-ekle" class="hover:text-orange-600 transition">İhale Başlat</a>
+      </div>
+
+      <div class="flex items-center gap-4">
         <% if (cuzdan) { %>
-          <div class="flex items-center gap-2 bg-orange-50 px-5 py-2 rounded-3xl">
-            <i data-lucide="coins" class="w-5 h-5 text-amber-500"></i>
-            <span class="font-semibold text-orange-700"><%= cuzdan.uyebakiye || 0 %> Jeton</span>
+          <div class="flex items-center gap-2 bg-amber-50 text-amber-700 px-5 py-2 rounded-3xl text-sm font-medium">
+            <i data-lucide="coins" class="w-5 h-5"></i>
+            <span><%= cuzdan.uyebakiye || 0 %> Jeton</span>
           </div>
         <% } %>
 
         <% if (user) { %>
-          <a href="/hesabim" class="flex items-center gap-2 hover:text-orange-600">
-            <i data-lucide="user" class="w-5 h-5"></i>
-            <span><%= user.uyeadi %></span>
+          <a href="/hesabim" class="flex items-center gap-2 text-gray-700 hover:text-orange-600">
+            <i data-lucide="user-circle" class="w-6 h-6"></i>
           </a>
         <% } else { %>
-          <a href="/login" class="bg-orange-600 text-white px-6 py-2.5 rounded-2xl font-medium hover:bg-orange-700 transition">Giriş Yap</a>
+          <a href="/login" 
+             class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-2xl font-semibold transition">
+            Giriş Yap
+          </a>
         <% } %>
       </div>
     </div>
   </nav>
 
-  <!-- ==================== HERO BANNER ==================== -->
-  <div class="hero-bg text-white py-24">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-6">
+  <!-- HERO SECTION -->
+  <div class="hero-bg text-white">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-7 space-y-8">
         <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full text-sm">
           🔥 Şu anda <span class="font-bold">142</span> aktif ihale var
         </div>
+
         <h1 class="text-5xl md:text-6xl font-bold leading-tight">
           En ucuza almak istiyorsan<br>
           <span class="text-amber-200">doğru yerdesin!</span>
         </h1>
-        <p class="text-xl text-orange-100 max-w-md">
+
+        <p class="text-xl text-orange-100 max-w-lg">
           Jetonlu açık arttırma sistemiyle istediğin ürünü çok daha uygun fiyata kazan.
         </p>
-        <a href="#urunler" 
-           class="inline-flex items-center bg-white text-orange-600 font-semibold text-lg px-10 py-5 rounded-3xl hover:bg-amber-50 transition-all">
-          Hemen İhalelere Göz At <i class="ml-3 fas fa-arrow-right"></i>
+
+        <a href="#aktif-ihaleler" 
+           class="inline-flex items-center bg-white text-orange-600 font-semibold px-8 py-4 rounded-3xl hover:bg-amber-50 transition text-lg">
+          Hemen İhalelere Göz At →
         </a>
       </div>
 
+      <!-- Hero Sağ Taraf - Slider -->
       <% if (slider && slider.length > 0) { %>
-        <% slider.slice(0,1).forEach(element => { %>
-        <div class="relative">
-          <img src="/slider/<%= element.slidegorsel %>" 
-               class="rounded-3xl shadow-2xl w-full" alt="<%= element.slideadi %>">
-          <div class="absolute bottom-6 left-6 bg-white text-gray-900 p-6 rounded-2xl shadow-xl max-w-xs">
-            <p class="text-orange-600 font-semibold">Sıcak İhale</p>
-            <h3 class="text-2xl font-bold mt-1"><%= element.slideadi %></h3>
-            <p class="text-3xl font-bold text-orange-600 mt-3">
-              <%= element.slideurunbaslangicfiyati %> TL
-            </p>
-          </div>
+        <div class="md:col-span-5">
+          <% slider.slice(0,1).forEach(element => { %>
+            <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+              <img src="/slider/<%= element.slidegorsel %>" 
+                   class="w-full h-auto" alt="<%= element.slideadi %>">
+              <div class="p-6">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <span class="text-orange-600 font-semibold">Sıcak İhale</span>
+                    <h3 class="text-2xl font-bold text-gray-900 mt-1"><%= element.slideadi %></h3>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-3xl font-bold text-orange-600"><%= element.slideurunbaslangicfiyati %> TL</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }); %>
         </div>
-        <% }); %>
       <% } %>
     </div>
   </div>
 
-  <!-- ==================== ÖZELLİKLER ==================== -->
-  <div class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-        <% if (anasayfa) { %>
-          <div class="flex gap-5">
-            <div class="text-5xl">🚀</div>
-            <div>
-              <h4 class="font-semibold text-lg"><%= anasayfa.ozellik1 || 'Her Gün Yüzlerce İhale' %></h4>
-              <p class="text-gray-600 mt-1"><%= anasayfa.altozellik1 || '' %></p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="text-5xl">🔒</div>
-            <div>
-              <h4 class="font-semibold text-lg"><%= anasayfa.ozellik2 || 'Güvenli Ödeme' %></h4>
-              <p class="text-gray-600 mt-1"><%= anasayfa.altozellik2 || '' %></p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="text-5xl">🕒</div>
-            <div>
-              <h4 class="font-semibold text-lg"><%= anasayfa.ozellik3 || '7/24 Destek' %></h4>
-              <p class="text-gray-600 mt-1"><%= anasayfa.altozellik3 || '' %></p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="text-5xl">💰</div>
-            <div>
-              <h4 class="font-semibold text-lg"><%= anasayfa.ozellik4 || 'Anında Geri Ödeme' %></h4>
-              <p class="text-gray-600 mt-1"><%= anasayfa.altozellik4 || '' %></p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="text-5xl">📦</div>
-            <div>
-              <h4 class="font-semibold text-lg"><%= anasayfa.ozellik5 || 'Hızlı Kargo' %></h4>
-              <p class="text-gray-600 mt-1"><%= anasayfa.altozellik5 || '' %></p>
-            </div>
-          </div>
-        <% } %>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== ÜRÜNLER - SON EKLENENLER & POPÜLER ==================== -->
-  <div id="urunler" class="max-w-7xl mx-auto px-6 py-16">
+  <!-- AKTİF İHALELER -->
+  <div id="aktif-ihaleler" class="max-w-7xl mx-auto px-6 py-16">
     <div class="flex items-center justify-between mb-10">
-      <h2 class="text-4xl font-bold flex items-center gap-3">
-        <i data-lucide="flame" class="w-10 h-10 text-orange-500"></i>
+      <h2 class="text-4xl font-bold text-gray-900 flex items-center gap-3">
+        <i data-lucide="flame" class="w-9 h-9 text-orange-500"></i>
         Aktif İhaleler
       </h2>
-      <a href="#" class="text-orange-600 font-medium flex items-center gap-2 hover:gap-3 transition">
-        Tümünü Gör <i class="fas fa-arrow-right"></i>
-      </a>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       <% urunler.forEach(element => { %>
         <div class="product-card bg-white rounded-3xl overflow-hidden border border-gray-100">
-          <div class="relative">
+          <div class="relative h-64">
             <a href="/urunler/<%= element.ihaleurl %>">
               <img src="/urungorselleri/<%= element.urungorsel1 %>" 
-                   class="w-full h-64 object-cover" alt="<%= element.urunadi %>">
+                   class="w-full h-full object-cover" alt="<%= element.urunadi %>">
             </a>
             
             <!-- Geri Sayım -->
-            <div class="absolute top-4 right-4 bg-black/80 text-white text-xs px-4 py-2 rounded-2xl flex items-center gap-2 font-mono countdown">
+            <div class="absolute top-4 right-4 bg-black/75 text-white text-xs px-4 py-2 rounded-2xl flex items-center gap-2 font-mono">
               <i data-lucide="clock" class="w-4 h-4"></i>
-              <span id="countdown-<%= element._id %>">00:00:00</span>
+              <span id="countdown-<%= element._id %>" class="countdown">02:45:19</span>
             </div>
           </div>
 
           <div class="p-6">
-            <h3 class="font-semibold text-lg line-clamp-2 min-h-[56px]">
+            <h3 class="font-semibold text-lg leading-tight line-clamp-2 h-14">
               <a href="/urunler/<%= element.ihaleurl %>" class="hover:text-orange-600">
                 <%= element.urunadi %>
               </a>
             </h3>
 
-            <div class="mt-4 flex justify-between items-end">
+            <div class="mt-6 flex justify-between items-end">
               <div>
-                <p class="text-xs text-gray-500">Şu anki Teklif</p>
-                <p class="text-2xl font-bold text-orange-600"><%= element.baslangicfiyati || element.urunfiyati %> TL</p>
+                <p class="text-xs text-gray-500">Şu anki teklif</p>
+                <p class="text-2xl font-bold text-orange-600">
+                  <%= element.baslangicfiyati || element.urunfiyati %> TL
+                </p>
               </div>
               <div class="text-right">
                 <p class="text-xs text-gray-500">Başlangıç</p>
-                <p class="font-medium line-through text-gray-400"><%= element.urunfiyati %> TL</p>
+                <p class="line-through text-gray-400"><%= element.urunfiyati %> TL</p>
               </div>
             </div>
 
             <a href="/urunler/<%= element.ihaleurl %>" 
-               class="mt-6 block w-full bg-orange-600 hover:bg-orange-700 text-white text-center font-semibold py-4 rounded-2xl transition">
-              İhaleye Katıl →
+               class="mt-8 block w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4 rounded-2xl text-center transition">
+              İhaleye Katıl
             </a>
           </div>
         </div>
@@ -197,34 +165,31 @@
     </div>
   </div>
 
-</main>
+</body>
 
-<!-- Lucide Icons'u aktifleştir -->
+<!-- Lucide Icons Aktifleştir -->
 <script>
   lucide.createIcons();
 
-  // Basit geri sayım (ileride gerçek ihale bitiş tarihini bağlayacağız)
-  document.querySelectorAll('.countdown span').forEach(span => {
-    let seconds = 3600 + Math.floor(Math.random() * 7200); // rastgele 1-3 saat
+  // Basit geri sayım (ileride gerçek zamanlı yapacağız)
+  document.querySelectorAll('.countdown').forEach(el => {
+    let timeLeft = 7200; // 2 saat örnek
 
-    setInterval(() => {
-      seconds--;
-      if (seconds <= 0) {
-        span.textContent = "BİTTİ";
+    const timer = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        el.textContent = "SÜRE DOLDU";
+        clearInterval(timer);
         return;
       }
-      const h = Math.floor(seconds / 3600);
-      const m = Math.floor((seconds % 3600) / 60);
-      const s = seconds % 60;
-      span.textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor((timeLeft % 3600) / 60);
+      const seconds = timeLeft % 60;
+
+      el.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }, 1000);
   });
 </script>
 
 <%- include('../partials/_footers'); %>
-
-<!-- Eski script'leri koruyoruz (sorun çıkmasın diye) -->
-<script src="/home/js/js/jquery-3.5.1.min.js"></script>
-<script src="/home/js/js/bootstrap.bundle.min.js"></script>
-<script src="/home/js/js/main.js"></script>
-</body>
