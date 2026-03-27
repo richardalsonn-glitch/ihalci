@@ -162,147 +162,135 @@
 </section>
 <!-- hero end -->
 
-    <!-- feature start -->
-    <div class="feature pt-40 pb-30">
-        <div class="container">
-            <div class="feature__wrap ul_li">
-                <div class="feature__item ul_li">
-                    <div class="icon">
-                        <img src="/home/img/img/icon/feat_01.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3><%- anasayfa.ozellik1 %></h3>
-                        <p><%- anasayfa.altozellik1 %></p>
-                    </div>
+   <!-- feature start -->
+<div class="feature pt-40 pb-30">
+    <div class="container">
+        <div class="feature__wrap ul_li">
+            <div class="feature__item ul_li">
+                <div class="icon">
+                    <img src="/home/img/img/icon/feat_01.svg" alt="">
                 </div>
-                <div class="feature__item ul_li">
-                    <div class="icon">
-                        <img src="/home/img/img/icon/feat_02.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3><%- anasayfa.ozellik2 %></h3>
-                        <p><%- anasayfa.altozellik2 %></p>
-                    </div>
+                <div class="content">
+                    <h3><%- anasayfa.ozellik1 %></h3>
+                    <p><%- anasayfa.altozellik1 %></p>
                 </div>
-                <div class="feature__item ul_li">
-                    <div class="icon">
-                        <img src="/home/img/img/icon/feat_03.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3><%- anasayfa.ozellik3 %></h3>
-                        <p><%- anasayfa.altozellik3 %></p>
-                    </div>
+            </div>
+            <div class="feature__item ul_li">
+                <div class="icon">
+                    <img src="/home/img/img/icon/feat_02.svg" alt="">
                 </div>
-                <div class="feature__item ul_li">
-                    <div class="icon">
-                        <img src="/home/img/img/icon/feat_04.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3><%- anasayfa.ozellik4 %></h3>
-                        <p><%- anasayfa.altozellik4 %></p>
-                    </div>
+                <div class="content">
+                    <h3><%- anasayfa.ozellik2 %></h3>
+                    <p><%- anasayfa.altozellik2 %></p>
                 </div>
-                <div class="feature__item ul_li">
-                    <div class="icon">
-                        <img src="/home/img/img/icon/feat_05.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3><%- anasayfa.ozellik5 %></h3>
-                        <p><%- anasayfa.altozellik5 %></p>
-                    </div>
+            </div>
+            <div class="feature__item ul_li">
+                <div class="icon">
+                    <img src="/home/img/img/icon/feat_03.svg" alt="">
+                </div>
+                <div class="content">
+                    <h3><%- anasayfa.ozellik3 %></h3>
+                    <p><%- anasayfa.altozellik3 %></p>
+                </div>
+            </div>
+            <div class="feature__item ul_li">
+                <div class="icon">
+                    <img src="/home/img/img/icon/feat_04.svg" alt="">
+                </div>
+                <div class="content">
+                    <h3><%- anasayfa.ozellik4 %></h3>
+                    <p><%- anasayfa.altozellik4 %></p>
+                </div>
+            </div>
+            <div class="feature__item ul_li">
+                <div class="icon">
+                    <img src="/home/img/img/icon/feat_05.svg" alt="">
+                </div>
+                <div class="content">
+                    <h3><%- anasayfa.ozellik5 %></h3>
+                    <p><%- anasayfa.altozellik5 %></p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- feature end -->
+</div>
+<!-- feature end -->
 
-    <!-- rd slide product start -->
-    <div class="rd-slide-product">
-        <div class="container">
-            <div class="row mt-none-30">
-                <div class="col-lg-3 mt-30">
-                    <div class="product-category" data-background="/home/img/img/bg/cat_bg.jpg">
-                        <h2 class="section-heading mb-25"><span><span>Kategoriler</span></span></h2>
-                        <ul class="list-unstyled">
-                            <% kategoriler.forEach(element => { %>
-                                <li class="cat-item-has-children">
-                                    <a href="/kategoriler/<%- element.kategoriurl %>">
-                                        <img src="/home/img/img/icon/cat_01.svg" alt="">
-                                        <%- element.kategoriadi %>
+<!-- ürünler alanı start -->
+<div class="rd-slide-product" style="padding-bottom:40px;">
+    <div class="container">
+        <div class="row mt-none-30">
+
+            <!-- sol kategori -->
+            <div class="col-lg-3 mt-30">
+                <div class="product-category" data-background="/home/img/img/bg/cat_bg.jpg">
+                    <h2 class="section-heading mb-25"><span><span>Kategoriler</span></span></h2>
+                    <ul class="list-unstyled">
+                        <% kategoriler.forEach(element => { %>
+                            <li class="cat-item-has-children">
+                                <a href="/kategoriler/<%- element.kategoriurl %>">
+                                    <img src="/home/img/img/icon/cat_01.svg" alt="">
+                                    <%- element.kategoriadi %>
+                                </a>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- sağ son eklenenler -->
+            <div class="col-lg-9 mt-30">
+                <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+                    <h2 class="section-heading mb-25"><span>Son Eklenenler</span></h2>
+
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+                        <% urunler.slice(0, 8).forEach(function(item){ %>
+                            <div class="product__item" style="height:auto !important;border:1px solid #f0f0f0;border-radius:12px;padding:16px;box-shadow:none;">
+                                <div class="product__img text-center pos-rel" style="margin-bottom:12px;">
+                                    <a href="/urunler/<%- item.ihaleurl %>">
+                                        <img src="/urungorselleri/<%- item.urungorsel1 %>" alt="" style="height:140px;width:140px;object-fit:contain;">
                                     </a>
-                                </li>
-                            <% }); %>
-                        </ul>
-                    </div>
-                </div>
-
-                <script>
-                    window.addEventListener('load', function() {
-                        var productItems = document.querySelectorAll('.product__item');
-                        var maxHeight = 0;
-
-                        productItems.forEach(function(item) {
-                            if (item.offsetHeight > maxHeight) {
-                                maxHeight = item.offsetHeight;
-                            }
-                        });
-
-                        productItems.forEach(function(item) {
-                            item.style.height = maxHeight + 'px';
-                        });
-                    });
-                </script>
-
-                <div class="col-lg-9 mt-30">
-                    <div class="rd-slide-products">
-                        <h2 class="section-heading mb-25"><span>Son Eklenenler</span></h2>
-                        <div class="rd-product__slide tx-arrow">
-                            <% for (let i = 0; i < urunler.length; i += 4) { %>
-                                <div class="rd-product__slide-item">
-                                    <% for (let j = i; j < i + 4 && j < urunler.length; j++) { %>
-                                        <div class="product__item">
-                                            <div class="product__img text-center pos-rel">
-                                                <a href="/urunler/<%- urunler[j].ihaleurl %>">
-                                                    <img src="/urungorselleri/<%- urunler[j].urungorsel1 %>" alt="" height="120px" width="120px">
-                                                </a>
-                                            </div>
-                                            <div class="product__content">
-                                                <div class="product__review ul_li_center">
-                                                    <ul class="rating-star ul_li mr-10">
-                                                        <li><i class="fas fa-star"></i></li>
-                                                        <li><i class="fas fa-star"></i></li>
-                                                        <li><i class="fas fa-star"></i></li>
-                                                        <li><i class="far fa-star"></i></li>
-                                                        <li><i class="far fa-star"></i></li>
-                                                    </ul>
-                                                    <span>(126) Değerlendirme</span>
-                                                </div>
-                                                <h2 class="product__title">
-                                                    <a href="/urunler/<%- urunler[j].ihaleurl %>"><%- urunler[j].urunadi %></a>
-                                                </h2>
-                                                <h4 class="product__price">
-                                                    <span class="Yeni"><%- urunler[j].baslangicfiyati %> TL</span>
-                                                    <span class="old"><%- urunler[j].urunfiyati %> TL</span>
-                                                </h4>
-                                            </div>
-                                            <ul class="product__action">
-                                                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
-                                                <li><a href="#!"><i class="far fa-heart"></i></a></li>
-                                            </ul>
-                                            <span class="badge-skew">Yeni</span>
-                                        </div>
-                                    <% } %>
                                 </div>
-                            <% } %>
-                        </div>
+
+                                <div class="product__content">
+                                    <div class="product__review ul_li_center" style="justify-content:flex-start;margin-bottom:8px;">
+                                        <ul class="rating-star ul_li mr-10">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="far fa-star"></i></li>
+                                            <li><i class="far fa-star"></i></li>
+                                        </ul>
+                                        <span>(126)</span>
+                                    </div>
+
+                                    <h2 class="product__title" style="min-height:48px;">
+                                        <a href="/urunler/<%- item.ihaleurl %>"><%- item.urunadi %></a>
+                                    </h2>
+
+                                    <h4 class="product__price" style="margin-bottom:10px;">
+                                        <span class="Yeni"><%- item.baslangicfiyati %> TL</span>
+                                        <span class="old"><%- item.urunfiyati %> TL</span>
+                                    </h4>
+
+                                    <div style="font-size:13px;color:#777;margin-bottom:12px;">
+                                        İhale başlangıç bedeli ile yayında
+                                    </div>
+
+                                    <a href="/urunler/<%- item.ihaleurl %>" style="display:inline-block;background:#ff8c1a;color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;text-decoration:none;">
+                                        İhaleye Git
+                                    </a>
+                                </div>
+                            </div>
+                        <% }); %>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
-    <!-- rd slide product end -->
+</div>
+<!-- ürünler alanı end -->
 
     <!-- brand start -->
     <div class="brand pt-80 pb-80">
