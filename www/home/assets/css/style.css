@@ -7118,6 +7118,8 @@ p.checkout-coupon input[type=text]::placeholder {
 .str-info {
   margin-left: 0px;
 }
+/* ===== MEGA MENU FIX ===== */
+
 .mega-parent {
     position: relative;
 }
@@ -7126,45 +7128,59 @@ p.checkout-coupon input[type=text]::placeholder {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 500px;
+    width: 520px;
     background: #fff;
     display: flex;
-    padding: 20px;
+    padding: 20px 25px;
     gap: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    border-radius: 10px;
+    z-index: 9999;
+
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s;
-    border-radius: 10px;
-    z-index: 999;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
 }
 
+/* hover açılması */
 .mega-parent:hover .mega-menu-custom {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
 }
 
+/* kolon */
 .mega-col {
     display: flex;
     flex-direction: column;
+    min-width: 140px;
 }
 
+/* başlık */
 .mega-col h6 {
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #222 !important;
+    font-size: 15px;
 }
 
+/* LINK FIX (ASIL PROBLEM BURASI) */
 .mega-col a {
-    color: #333;
+    display: block !important;
+    color: #333 !important;
     text-decoration: none;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 14px;
-    transition: 0.2s;
+    opacity: 1 !important;
+    visibility: visible !important;
+    line-height: 1.5;
 }
 
+/* hover efekti */
 .mega-col a:hover {
-    color: #ff6a00;
-    transform: translateX(5px);
+    color: #ff6a00 !important;
+    transform: translateX(4px);
 }
 .yorumuyazan, .degerlendirmeyazisi{
   color: #828282;
