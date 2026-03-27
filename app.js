@@ -125,6 +125,8 @@ global.siteData;
 require('./routers/routers')(this);
 
 
-app.listen(config.PORT, () => {
-    console.log(`${config.PORT} Bağlantısı Başarılı`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`${PORT} Bağlantısı Başarılı`);
 });
