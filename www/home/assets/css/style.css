@@ -7181,6 +7181,20 @@ p.checkout-coupon input[type=text]::placeholder {
     color: #ff6a00 !important;
     transform: translateX(4px);
 }
+.header,
+.header__bottom,
+.main-menu,
+.main-menu ul,
+.main-menu ul li,
+.main-menu ul li ul.submenu,
+.mega-menu-custom {
+    z-index: 9999;
+}
+
+.live-auction-page {
+    position: relative;
+    z-index: 1;
+}
 .yorumuyazan, .degerlendirmeyazisi{
   color: #828282;
 }
