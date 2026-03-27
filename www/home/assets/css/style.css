@@ -7195,6 +7195,27 @@ p.checkout-coupon input[type=text]::placeholder {
     position: relative;
     z-index: 1;
 }
+.live-blink-badge {
+    animation: liveBlink 1s infinite;
+    box-shadow: 0 0 0 rgba(255, 122, 0, 0.4);
+}
+
+@keyframes liveBlink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.45);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.03);
+        box-shadow: 0 0 0 10px rgba(255, 122, 0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 122, 0, 0);
+    }
 .yorumuyazan, .degerlendirmeyazisi{
   color: #828282;
 }
