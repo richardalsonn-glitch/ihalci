@@ -34,10 +34,10 @@
             <div>
               <span style="background:#ff8c1a;color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;">🔴 CANLI İHALE</span>
             </div>
-            <div style="font-size:15px;color:#666;">
-              Kalan Süre:
-              <strong style="color:#ff8c1a;font-size:18px;">00:09:42</strong>
-            </div>
+             <div style="font-size:16px;font-weight:600;color:#444;">
+             Kalan Süre:
+             <span id="auction-timer" style="color:#ff7a00;font-size:20px;">00:09:42</span>
+         </div>
           </div>
 
           <div style="display:flex;gap:25px;flex-wrap:wrap;align-items:center;">
@@ -50,14 +50,14 @@
               <p style="color:#777;font-size:16px;margin-bottom:15px;">256 GB • Titanyum • Kapalı Kutu</p>
 
               <div style="margin-bottom:18px;">
-                <div style="font-size:14px;color:#888;">Anlık Teklif</div>
-                <div style="font-size:42px;font-weight:800;color:#222;">145 TL</div>
+                <div style="font-size:14px;color:#888;">Anlık Fiyat</div>
+                <div style="font-size:40px;font-weight:800;color:#222;" id="live-price"><%- element.slideurunbaslangicfiyati %> TL</div>
               </div>
 
               <div style="display:grid;grid-template-columns:repeat(2,minmax(140px,1fr));gap:14px;margin-bottom:20px;">
                 <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
-                  <div style="font-size:13px;color:#888;">Sıradaki Teklif</div>
-                  <div style="font-size:22px;font-weight:700;color:#ff8c1a;">310 Jeton</div>
+                  <div style="font-size:13px;color:#888;">İhale Giriş Bedeli</div>
+                  <div style="font-size:20px;font-weight:700;color:#ff7a00;">300 Jeton</div>
                 </div>
                 <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
                   <div style="font-size:13px;color:#888;">Toplam Teklif</div>
