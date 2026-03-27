@@ -7216,6 +7216,31 @@ p.checkout-coupon input[type=text]::placeholder {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 122, 0, 0);
     }
+	.header-mid .logo-image {
+    white-space: nowrap;
+}
+
+.header-mid .header-action .icon-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-mid .header-action .text {
+    line-height: 1.1;
+}
+
+@media (max-width: 991px) {
+    .header-mid .logo {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .header-mid .header-action {
+        justify-content: center !important;
+        margin-top: 10px;
+    }
 .yorumuyazan, .degerlendirmeyazisi{
   color: #828282;
 }
