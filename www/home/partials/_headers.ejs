@@ -29,6 +29,7 @@
       <link rel="stylesheet" href="/home/css/font-awesome-pro.css">
       <link rel="stylesheet" href="/home/css/default.css">
       <link rel="stylesheet" href="/home/css/style.css">
+
       <link rel="stylesheet" href="/home/css/urunler.css">
 
       <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
@@ -77,6 +78,55 @@
           flex-wrap:wrap;
           margin-left:0 !important;
         }
+
+        .mobile-custom-menu{
+          margin-top:20px;
+          border-top:1px solid #ececec;
+          padding-top:15px;
+        }
+        .mobile-custom-menu ul{
+          list-style:none;
+          padding:0;
+          margin:0;
+        }
+        .mobile-custom-menu > ul > li{
+          margin-bottom:16px;
+        }
+        .mobile-custom-menu a{
+          color:#222;
+          text-decoration:none;
+          display:block;
+          line-height:1.5;
+        }
+        .mobile-custom-menu .mobile-main-link{
+          font-size:18px;
+          font-weight:700;
+        }
+        .mobile-custom-sub{
+          margin-top:10px;
+          padding-left:14px;
+          border-left:2px solid #f1f1f1;
+        }
+        .mobile-custom-sub li{
+          margin-bottom:8px;
+        }
+        .mobile-custom-sub a{
+          font-size:15px;
+          color:#666;
+        }
+        .mobile-offcanvas-wallet{
+          display:flex;
+          flex-direction:column;
+          gap:10px;
+          margin-top:20px;
+          padding-top:15px;
+          border-top:1px solid #ececec;
+        }
+        .mobile-offcanvas-wallet .header-balance-box{
+          justify-content:flex-start;
+          width:100%;
+        }
+
         @media (max-width:991px){
           .header__search{
             margin-left:0 !important;
@@ -434,20 +484,93 @@
         </div>
         <div class="offcanvas__content">
             <div class="offcanvas__logo mb-40">
-                <a href="/">
-                <img src="/home/img/logo/logo-white.png" alt="logo">
+                <a href="/" style="font-size:28px;font-weight:800;color:#222;text-decoration:none;line-height:1;display:inline-block;">
+                    İhale<span style="color:#ff8c1a;">Sende</span>
                 </a>
             </div>
+
             <div class="offcanvas__search mb-25">
-                <form action="#">
-                    <input type="text" placeholder="What are you searching for?">
-                    <button type="submit" ><i class="far fa-search"></i></button>
+                <form action="/ara" method="POST">
+                    <input type="text" name="ara" placeholder="What are you searching for?">
+                    <button type="submit"><i class="far fa-search"></i></button>
                 </form>
             </div>
-            <div class="mobile-menu fix"></div>
-            <div class="offcanvas__action">
 
+            <!-- MOBİL MENÜ -->
+            <div class="mobile-custom-menu">
+                <ul>
+                    <li>
+                        <a href="/" class="mobile-main-link">Anasayfa</a>
+                    </li>
+
+                    <li>
+                        <a href="/ihaleler" class="mobile-main-link">İhaleler</a>
+                        <ul class="mobile-custom-sub">
+                            <li><a href="/ihaleler">Tüm İhaleler</a></li>
+                            <li><a href="/canli-ihaleler">Canlı İhaleler</a></li>
+                            <li><a href="/yaklasan-ihaleler">Yaklaşan İhaleler</a></li>
+                            <li><a href="/biten-ihaleler">Biten İhaleler</a></li>
+                            <li><a href="/kazananlar">Son Kazananlar</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/urunler" class="mobile-main-link">Ürünler</a>
+                        <ul class="mobile-custom-sub">
+                            <li><a href="/urunler">Tüm Ürünler</a></li>
+                            <li><a href="/kategoriler/telefon">Telefon</a></li>
+                            <li><a href="/kategoriler/kulaklik">Kulaklık</a></li>
+                            <li><a href="/kategoriler/oyun-konsolu">Oyun Konsolu</a></li>
+                            <li><a href="/kategoriler/kucuk-ev-aletleri">Ev Aletleri</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/hakkimizda" class="mobile-main-link">Hakkımızda</a>
+                    </li>
+
+                    <li>
+                        <a href="/blog" class="mobile-main-link">Blog</a>
+                    </li>
+
+                    <li>
+                        <a href="/iletisim" class="mobile-main-link">İletişim</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="mobile-main-link">Kategoriler</a>
+                        <ul class="mobile-custom-sub">
+                            <% kategoriler.forEach(kategori => { %>
+                                <li>
+                                    <a href="/kategoriler/<%- kategori.kategoriurl %>"><%- kategori.kategoriadi %></a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </li>
+                </ul>
             </div>
+
+            <!-- MOBİL BAKİYE/JETON -->
+            <div class="mobile-offcanvas-wallet">
+                <div class="header-balance-box header-balance-tl">
+                    💰 <% if(cuzdan){ %><%- cuzdan.bakiye %><% } else { %>0<% } %> TL
+                </div>
+
+                <div class="header-balance-box header-balance-jeton">
+                    🪙 <% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %> Jeton
+                </div>
+
+                <a href="/bakiye" class="header-balance-box header-balance-link">
+                    + Bakiye Yükle
+                </a>
+
+                <a href="/urun-ekle" class="header-balance-box header-balance-link" style="background:#ff8c1a;">
+                    + İhale Ekle
+                </a>
+            </div>
+
+            <div class="mobile-menu fix"></div>
+            <div class="offcanvas__action"></div>
         </div>
         </div>
     </div>
