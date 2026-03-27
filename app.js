@@ -70,9 +70,8 @@ global.siteData;
         bandurumu: false,
         uyekayittarihi: moment().format('YYYY-MM-DD HH:mm:ss')
       };
-      await admin.save();
       const admin = new uyelerModel(adminData);
-    }
+      await admin.save();
       if(anasayfa === 0 ){
         const anasayfaData = { 
         ozellik1 : "Her Gün Yüzlerce İhale",
