@@ -1,4 +1,4 @@
 module.exports = {
-PORT:80,
-mongoDB:'mongodb://127.0.0.1:27017/ihale'
+  PORT: process.env.PORT || 3000,
+  mongoDB: process.env.MONGODB_URI
 }
