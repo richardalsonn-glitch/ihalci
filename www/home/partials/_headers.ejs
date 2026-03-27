@@ -134,78 +134,93 @@
     <!-- header-start -->
      <header class="header d-blue-bgs">
         
-        <div class="header-mid">
-            <div class="container">
-                <div class="heade-mid-inner">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
-                            <div class="header__info header__info-2">
-                                <div class="logo logo-3">
-                                   <a href="/" class="logo-image" style="font-size:38px;font-weight:800;color:#fff;text-decoration:none;letter-spacing:0.5px;">
-                            İhale<span style="color:#ff8c1a;">Sende</span>
-                           </a>                              
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
-                            <div class="header__search">
-                                <form action="/ara" method="POST">
-                                    <div class="header__search-box">
-                                      <input class="search-input search-input-2" name="ara" type="text" placeholder="İhale Ara...">
-                                      <button class="button button-6 button-7" type="submit"><i class="far fa-search"></i></button>
-                                    </div>
-                                  </form>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
-                            <div class="header-action">
-                                <div class="block-userlink">
-                                 
-                                        <% if(typeof user!== 'undefined' && user.uyemail) { %>
-                                            <a class="icon-link icon-link-2" href="/hesabim">
-                                                <i class="flaticon-user"></i>
-                                                <span class="text">
-                                    <span class="sub"> Hesap </span>
-                                    Bilgilerim </span>
-                                    <% }else{ %>
-                                        <a class="icon-link icon-link-2" href="/login">
-                                            <i class="flaticon-user"></i>
-                                            <span class="text">
-                                        <span class="sub">Giriş Yap </span>
-                                        Hesabım </span>
-                                    <% } %>
-                                    </a>
-                                </div>
-                              <div class="block-wishlist action">
-                               <a class="icon-link icon-link-2" href="/bakiye">
-                                <i class="flaticon-heart"></i>
-                                <span class="count count-2">0</span>
-                                <span class="text">
-                                <span class="sub">Bakiye Ekle</span>
-                                </span>
-                                </a>
-                                </div>
-                                <div class="block-cart action">
-                                    <a class="icon-link icon-link-2" href="/urun-ekle">
-                                    <i class="flaticon-shopping-bag"></i>
-                                    <span class="count count-2">1</span>
-                                    <span class="text">
-                                    <span class="sub">İhale Ekle:</span>
-                                    <% if(cuzdan) { %>
-                                        Bakiyem : <%- cuzdan.bakiye %>TL </span>
-                                    <% }else{ %>
+   <div class="header-mid" style="padding:18px 0 14px 0;">
+    <div class="container">
+        <div class="heade-mid-inner">
+            <div class="row align-items-center">
 
-                                    <%} %>
-                                    </a>
-                                   
-                                </div>
-                            </div>
+                <!-- LOGO -->
+                <div class="col-xl-3 col-lg-3 col-md-12 mb-3 mb-lg-0">
+                    <div class="header__info header__info-2">
+                        <div class="logo logo-3" style="display:flex;align-items:center;height:100%;">
+                            <a href="/" class="logo-image" style="font-size:28px;font-weight:800;color:#fff;text-decoration:none;line-height:1;display:inline-block;">
+                                İhale<span style="color:#ff8c1a;">Sende</span>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- SEARCH -->
+                <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 mb-3 mb-lg-0">
+                    <div class="header__search">
+                        <form action="/ara" method="POST">
+                            <div class="header__search-box">
+                                <input class="search-input search-input-2" name="ara" type="text" placeholder="İhale Ara...">
+                                <button class="button button-6 button-7" type="submit">
+                                    <i class="far fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- USER ACTIONS -->
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <div class="header-action" style="display:flex;justify-content:flex-end;align-items:center;gap:18px;flex-wrap:wrap;">
+
+                        <!-- USER -->
+                        <div class="block-userlink">
+                            <% if(typeof user !== 'undefined' && user.uyemail) { %>
+                                <a class="icon-link icon-link-2" href="/hesabim">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                        <span class="sub">Hesap</span>
+                                        Bilgilerim
+                                    </span>
+                                </a>
+                            <% } else { %>
+                                <a class="icon-link icon-link-2" href="/login">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                        <span class="sub">Giriş Yap</span>
+                                        Hesabım
+                                    </span>
+                                </a>
+                            <% } %>
+                        </div>
+
+                        <!-- BAKİYE -->
+                        <div class="block-wishlist action">
+                            <a class="icon-link icon-link-2" href="/bakiye">
+                                <i class="flaticon-heart"></i>
+                                <span class="count count-2">0</span>
+                                <span class="text">
+                                    <span class="sub">Bakiye Ekle</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <!-- İHALE EKLE -->
+                        <div class="block-cart action">
+                            <a class="icon-link icon-link-2" href="/urun-ekle">
+                                <i class="flaticon-shopping-bag"></i>
+                                <span class="count count-2">1</span>
+                                <span class="text">
+                                    <span class="sub">İhale Ekle</span>
+                                    <% if(cuzdan) { %>
+                                        Bakiyem : <%- cuzdan.bakiye %> TL
+                                    <% } %>
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-        
-        
+    </div>
+</div>
         <div class="header__bottom d-none d-lg-block">
        
         </div> 
