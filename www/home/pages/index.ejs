@@ -1,195 +1,207 @@
-<%- include('../partials/_headers'); %>
+<section class="live-auction-page" style="padding:40px 0;background:#f5f5f5;">
+  <div class="container">
 
-<!-- ====================== SADECE TAILWIND + MODERN TASARIM ====================== -->
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- ÜST BÖLÜM -->
+    <div class="row" style="display:flex;flex-wrap:wrap;gap:25px;align-items:stretch;">
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
-  body {
-    font-family: 'Inter', system_ui, sans-serif;
-  }
-  
-  .product-card {
-    transition: all 0.3s ease;
-  }
-  .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  }
-  
-  .hero-bg {
-    background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
-  }
-</style>
-
-<body class="bg-gray-50">
-
-  <!-- NAVBAR -->
-  <nav class="bg-white border-b sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl font-bold text-orange-600">İhale<span class="text-gray-900">ci</span></span>
-      </div>
-
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="/" class="hover:text-orange-600 transition">Ana Sayfa</a>
-        <a href="/kategoriler/kadin" class="hover:text-orange-600 transition">Kategoriler</a>
-        <a href="/urun-ekle" class="hover:text-orange-600 transition">İhale Başlat</a>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <% if (cuzdan) { %>
-          <div class="flex items-center gap-2 bg-amber-50 text-amber-700 px-5 py-2 rounded-3xl text-sm font-medium">
-            <i data-lucide="coins" class="w-5 h-5"></i>
-            <span><%= cuzdan.uyebakiye || 0 %> Jeton</span>
+      <!-- CANLI İHALE -->
+      <div class="col-lg-8" style="flex:2;min-width:320px;">
+        <div style="background:#fff;border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(0,0,0,0.08);height:100%;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+            <div>
+              <span style="background:#ff8c1a;color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;">🔴 CANLI İHALE</span>
+            </div>
+            <div style="font-size:15px;color:#666;">
+              Kalan Süre:
+              <strong style="color:#ff8c1a;font-size:18px;">00:09:42</strong>
+            </div>
           </div>
-        <% } %>
 
-        <% if (user) { %>
-          <a href="/hesabim" class="flex items-center gap-2 text-gray-700 hover:text-orange-600">
-            <i data-lucide="user-circle" class="w-6 h-6"></i>
-          </a>
-        <% } else { %>
-          <a href="/login" 
-             class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-2xl font-semibold transition">
-            Giriş Yap
-          </a>
-        <% } %>
-      </div>
-    </div>
-  </nav>
+          <div style="display:flex;gap:25px;flex-wrap:wrap;align-items:center;">
+            <div style="flex:1;min-width:260px;text-align:center;">
+              <img src="/slider/461761.jpg" alt="Canlı ihale ürünü" style="max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#fafafa;padding:15px;">
+            </div>
 
-  <!-- HERO SECTION -->
-  <div class="hero-bg text-white">
-    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-12 gap-12 items-center">
-      <div class="md:col-span-7 space-y-8">
-        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full text-sm">
-          🔥 Şu anda <span class="font-bold">142</span> aktif ihale var
-        </div>
+            <div style="flex:1;min-width:280px;">
+              <h2 style="font-size:34px;font-weight:700;color:#222;margin-bottom:10px;">iPhone 15 Pro Max</h2>
+              <p style="color:#777;font-size:16px;margin-bottom:15px;">256 GB • Titanyum • Kapalı Kutu</p>
 
-        <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-          En ucuza almak istiyorsan<br>
-          <span class="text-amber-200">doğru yerdesin!</span>
-        </h1>
+              <div style="margin-bottom:18px;">
+                <div style="font-size:14px;color:#888;">Anlık Teklif</div>
+                <div style="font-size:42px;font-weight:800;color:#222;">145 TL</div>
+              </div>
 
-        <p class="text-xl text-orange-100 max-w-lg">
-          Jetonlu açık arttırma sistemiyle istediğin ürünü çok daha uygun fiyata kazan.
-        </p>
-
-        <a href="#aktif-ihaleler" 
-           class="inline-flex items-center bg-white text-orange-600 font-semibold px-8 py-4 rounded-3xl hover:bg-amber-50 transition text-lg">
-          Hemen İhalelere Göz At →
-        </a>
-      </div>
-
-      <!-- Hero Sağ Taraf - Slider -->
-      <% if (slider && slider.length > 0) { %>
-        <div class="md:col-span-5">
-          <% slider.slice(0,1).forEach(element => { %>
-            <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
-              <img src="/slider/<%= element.slidegorsel %>" 
-                   class="w-full h-auto" alt="<%= element.slideadi %>">
-              <div class="p-6">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <span class="text-orange-600 font-semibold">Sıcak İhale</span>
-                    <h3 class="text-2xl font-bold text-gray-900 mt-1"><%= element.slideadi %></h3>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-3xl font-bold text-orange-600"><%= element.slideurunbaslangicfiyati %> TL</p>
-                  </div>
+              <div style="display:grid;grid-template-columns:repeat(2,minmax(140px,1fr));gap:14px;margin-bottom:20px;">
+                <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
+                  <div style="font-size:13px;color:#888;">Sıradaki Teklif</div>
+                  <div style="font-size:22px;font-weight:700;color:#ff8c1a;">310 Jeton</div>
+                </div>
+                <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
+                  <div style="font-size:13px;color:#888;">Toplam Teklif</div>
+                  <div style="font-size:22px;font-weight:700;color:#222;">186</div>
+                </div>
+                <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
+                  <div style="font-size:13px;color:#888;">Katılımcı</div>
+                  <div style="font-size:22px;font-weight:700;color:#222;">42 Kişi</div>
+                </div>
+                <div style="background:#f7f7f7;padding:14px;border-radius:10px;">
+                  <div style="font-size:13px;color:#888;">Son Teklif Veren</div>
+                  <div style="font-size:22px;font-weight:700;color:#222;">Ali***</div>
                 </div>
               </div>
-            </div>
-          <% }); %>
-        </div>
-      <% } %>
-    </div>
-  </div>
 
-  <!-- AKTİF İHALELER -->
-  <div id="aktif-ihaleler" class="max-w-7xl mx-auto px-6 py-16">
-    <div class="flex items-center justify-between mb-10">
-      <h2 class="text-4xl font-bold text-gray-900 flex items-center gap-3">
-        <i data-lucide="flame" class="w-9 h-9 text-orange-500"></i>
-        Aktif İhaleler
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-      <% urunler.forEach(element => { %>
-        <div class="product-card bg-white rounded-3xl overflow-hidden border border-gray-100">
-          <div class="relative h-64">
-            <a href="/urunler/<%= element.ihaleurl %>">
-              <img src="/urungorselleri/<%= element.urungorsel1 %>" 
-                   class="w-full h-full object-cover" alt="<%= element.urunadi %>">
-            </a>
-            
-            <!-- Geri Sayım -->
-            <div class="absolute top-4 right-4 bg-black/75 text-white text-xs px-4 py-2 rounded-2xl flex items-center gap-2 font-mono">
-              <i data-lucide="clock" class="w-4 h-4"></i>
-              <span id="countdown-<%= element._id %>" class="countdown">02:45:19</span>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <a href="/ihale/iphone-15-pro-max" style="background:#ff8c1a;color:#fff;padding:14px 24px;border-radius:10px;font-weight:700;display:inline-block;text-decoration:none;">İHALEYE KATIL</a>
+                <a href="/jetonlarim" style="background:#222;color:#fff;padding:14px 24px;border-radius:10px;font-weight:700;display:inline-block;text-decoration:none;">JETONLARIM</a>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="p-6">
-            <h3 class="font-semibold text-lg leading-tight line-clamp-2 h-14">
-              <a href="/urunler/<%= element.ihaleurl %>" class="hover:text-orange-600">
-                <%= element.urunadi %>
-              </a>
-            </h3>
+      <!-- SAĞ PANEL -->
+      <div class="col-lg-4" style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:20px;">
 
-            <div class="mt-6 flex justify-between items-end">
+        <!-- SIRADAKİ İHALE -->
+        <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+          <h3 style="font-size:24px;font-weight:700;margin-bottom:18px;color:#222;">Sıradaki İhale</h3>
+          <img src="/slider/461761.jpg" alt="Sıradaki ihale" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;margin-bottom:15px;">
+          <h4 style="font-size:22px;font-weight:700;margin-bottom:8px;">AirPods Pro 2</h4>
+          <p style="color:#777;margin-bottom:10px;">Başlangıç: <strong>14:30</strong></p>
+          <p style="color:#777;margin-bottom:10px;">Giriş Bedeli: <strong style="color:#ff8c1a;">250 Jeton</strong></p>
+          <p style="color:#777;margin-bottom:15px;">Başlangıç Fiyatı: <strong>1 TL</strong></p>
+          <a href="/yaklasan-ihaleler" style="background:#ff8c1a;color:#fff;padding:12px 18px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:700;">DETAYI GÖR</a>
+        </div>
+
+        <!-- JETON PAKETLERİ -->
+        <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+          <h3 style="font-size:24px;font-weight:700;margin-bottom:18px;color:#222;">Jeton Paketleri</h3>
+
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;background:#f7f7f7;padding:14px;border-radius:10px;">
               <div>
-                <p class="text-xs text-gray-500">Şu anki teklif</p>
-                <p class="text-2xl font-bold text-orange-600">
-                  <%= element.baslangicfiyati || element.urunfiyati %> TL
-                </p>
+                <strong>250 Jeton</strong>
+                <div style="font-size:13px;color:#777;">Başlangıç paketi</div>
               </div>
-              <div class="text-right">
-                <p class="text-xs text-gray-500">Başlangıç</p>
-                <p class="line-through text-gray-400"><%= element.urunfiyati %> TL</p>
-              </div>
+              <div style="font-weight:700;color:#ff8c1a;">149,90 TL</div>
             </div>
 
-            <a href="/urunler/<%= element.ihaleurl %>" 
-               class="mt-8 block w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4 rounded-2xl text-center transition">
-              İhaleye Katıl
-            </a>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:#f7f7f7;padding:14px;border-radius:10px;">
+              <div>
+                <strong>500 Jeton</strong>
+                <div style="font-size:13px;color:#777;">En çok tercih edilen</div>
+              </div>
+              <div style="font-weight:700;color:#ff8c1a;">249,90 TL</div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;background:#f7f7f7;padding:14px;border-radius:10px;">
+              <div>
+                <strong>900 Jeton</strong>
+                <div style="font-size:13px;color:#777;">Avantajlı paket</div>
+              </div>
+              <div style="font-weight:700;color:#ff8c1a;">399,90 TL</div>
+            </div>
+          </div>
+
+          <a href="/bakiye" style="margin-top:16px;background:#222;color:#fff;padding:12px 18px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:700;">JETON YÜKLE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPÜLER İHALELER -->
+    <div style="margin-top:35px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+        <h2 style="font-size:30px;font-weight:700;color:#222;margin:0;">Popüler İhaleler</h2>
+        <a href="/ihaleler" style="color:#ff8c1a;font-weight:700;text-decoration:none;">Tümünü Gör</a>
+      </div>
+
+      <div class="row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+          <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+          <h4 style="margin-top:15px;font-size:22px;font-weight:700;">PS5 Slim</h4>
+          <p style="color:#777;">Kalan Süre: <strong>00:05:11</strong></p>
+          <p style="color:#777;">Anlık Teklif: <strong style="color:#ff8c1a;">98 TL</strong></p>
+          <p style="color:#777;">Sıradaki Teklif: <strong>220 Jeton</strong></p>
+          <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+          <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+          <h4 style="margin-top:15px;font-size:22px;font-weight:700;">Dyson V15</h4>
+          <p style="color:#777;">Kalan Süre: <strong>00:11:44</strong></p>
+          <p style="color:#777;">Anlık Teklif: <strong style="color:#ff8c1a;">74 TL</strong></p>
+          <p style="color:#777;">Sıradaki Teklif: <strong>180 Jeton</strong></p>
+          <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+          <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+          <h4 style="margin-top:15px;font-size:22px;font-weight:700;">Apple Watch</h4>
+          <p style="color:#777;">Kalan Süre: <strong>00:07:26</strong></p>
+          <p style="color:#777;">Anlık Teklif: <strong style="color:#ff8c1a;">52 TL</strong></p>
+          <p style="color:#777;">Sıradaki Teklif: <strong>160 Jeton</strong></p>
+          <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,0.07);">
+          <img src="/slider/461761.jpg" style="width:100%;height:180px;object-fit:contain;background:#fafafa;border-radius:12px;padding:10px;">
+          <h4 style="margin-top:15px;font-size:22px;font-weight:700;">AirPods Max</h4>
+          <p style="color:#777;">Kalan Süre: <strong>00:13:50</strong></p>
+          <p style="color:#777;">Anlık Teklif: <strong style="color:#ff8c1a;">81 TL</strong></p>
+          <p style="color:#777;">Sıradaki Teklif: <strong>195 Jeton</strong></p>
+          <a href="#" style="margin-top:8px;display:inline-block;color:#222;font-weight:700;text-decoration:none;">İhaleye Git →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPÜLER ÜRÜNLER + SON KAZANANLAR -->
+    <div class="row" style="display:grid;grid-template-columns:2fr 1fr;gap:25px;margin-top:35px;">
+      <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+        <h2 style="font-size:30px;font-weight:700;color:#222;margin-bottom:18px;">Popüler Ürünler</h2>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+          <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+            <h5 style="font-size:20px;font-weight:700;">Telefon</h5>
+            <p style="color:#777;margin:0;">12 aktif ihale</p>
+          </div>
+          <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+            <h5 style="font-size:20px;font-weight:700;">Kulaklık</h5>
+            <p style="color:#777;margin:0;">8 aktif ihale</p>
+          </div>
+          <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+            <h5 style="font-size:20px;font-weight:700;">Oyun Konsolu</h5>
+            <p style="color:#777;margin:0;">5 aktif ihale</p>
+          </div>
+          <div style="background:#f7f7f7;padding:16px;border-radius:12px;text-align:center;">
+            <h5 style="font-size:20px;font-weight:700;">Küçük Ev Aleti</h5>
+            <p style="color:#777;margin:0;">9 aktif ihale</p>
           </div>
         </div>
-      <% }); %>
+      </div>
+
+      <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+        <h2 style="font-size:28px;font-weight:700;color:#222;margin-bottom:18px;">Son Kazananlar</h2>
+
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+            <strong>Meh***</strong>
+            <div style="font-size:14px;color:#777;">AirPods Pro 2 • 84 TL</div>
+          </div>
+          <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+            <strong>Ayş***</strong>
+            <div style="font-size:14px;color:#777;">iPhone 15 • 162 TL</div>
+          </div>
+          <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+            <strong>Bur***</strong>
+            <div style="font-size:14px;color:#777;">PS5 Slim • 123 TL</div>
+          </div>
+          <div style="padding:14px;background:#f7f7f7;border-radius:10px;">
+            <strong>Can***</strong>
+            <div style="font-size:14px;color:#777;">Dyson V15 • 91 TL</div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
-
-</body>
-
-<!-- Lucide Icons Aktifleştir -->
-<script>
-  lucide.createIcons();
-
-  // Basit geri sayım (ileride gerçek zamanlı yapacağız)
-  document.querySelectorAll('.countdown').forEach(el => {
-    let timeLeft = 7200; // 2 saat örnek
-
-    const timer = setInterval(() => {
-      timeLeft--;
-      if (timeLeft <= 0) {
-        el.textContent = "SÜRE DOLDU";
-        clearInterval(timer);
-        return;
-      }
-
-      const hours = Math.floor(timeLeft / 3600);
-      const minutes = Math.floor((timeLeft % 3600) / 60);
-      const seconds = timeLeft % 60;
-
-      el.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
-  });
-</script>
-
-<%- include('../partials/_footers'); %>
+</section>
