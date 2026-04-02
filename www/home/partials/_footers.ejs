@@ -163,6 +163,18 @@
       <script src="/home/js/ajax-form.js"></script>
       <script src="/home/js/main.js"></script>
             <script src="/home/js/ui-slider-range.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const savedJeton = localStorage.getItem("liveJetonCount");
 
+    if (savedJeton) {
+        const headerJeton = document.getElementById("headerJetonCount");
+        const mobileJeton = document.getElementById("mobileHeaderJetonCount");
+
+        if (headerJeton) headerJeton.textContent = savedJeton;
+        if (mobileJeton) mobileJeton.textContent = savedJeton;
+    }
+});
+</script>
    </body>
 </html>
