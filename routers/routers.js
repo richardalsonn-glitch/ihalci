@@ -7,8 +7,15 @@ module.exports = function () {
 
     app.get('/jeton-paketleri', async (req, res) => {
         res.render('home/pages/jeton-paketleri', {
-            site,
-            user: req.user || null,
+            site: typeof site !== 'undefined' ? site : {
+                site: {
+                    baslik: 'İhale Sende',
+                    aciklama: '',
+                    anahtar: '',
+                    favicon: ''
+                }
+            },
+            user: typeof req.user !== 'undefined' ? req.user : null,
             cuzdan: typeof cuzdan !== 'undefined' ? cuzdan : null,
             kategoriler: typeof kategoriler !== 'undefined' ? kategoriler : [],
             altkategoriler: typeof altkategoriler !== 'undefined' ? altkategoriler : []
