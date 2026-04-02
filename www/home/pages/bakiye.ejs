@@ -1,71 +1,351 @@
-<%- include('../partials/_headers');  %>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <link rel="stylesheet" href="/home/css/main.css">
-            <div class="page-content pt-150 pb-150">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 m-auto">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="dashboard-menu">
-                                        <ul class="nav flex-column" role="tablist">
-                                           <!--   <li class="nav-item">
-                                                <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Bakiye Ekle</a>
-                                            </li>
-                                          li class="nav-item">
-                                                <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Teklif Verdiğim İhaleler</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Eklediğim İhaleler</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#degerlendirmelerim" role="tab" aria-controls="degerlendirme" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Değerlendirmelerim</a>
-                                            </li>
-                                          
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>Adresim</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Hesap Detayım</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="cikis"><i class="fi-rs-sign-out mr-10"></i>Çıkış</a>
-                                            </li> -->
-                                        </ul>
-                                    </div>
-                                </div>
-                                    <div class="tab-content account dashboard-content pl-50">
-                                        <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="mb-0">Ne Kadar Bakiye Eklemek İstiyorsunuz ?</h3>
-                                                </div>
-                                                <form action="odeme" method="GET">
-                                                <div class="card-body">
-                                                    <input type="text" name="odemetutari" class="form-control" placeholder="0 TL">
-                                                    <br>
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="">Ödeme Tipi Seçiniz.</option>
-                                                        <option value="">Banka Havalesi</option>
-                                                    </select>
-                                                    <br>
-                                                    <button type="submit">Ödeme Yap</button>
-                                                </div>
-                                        
-                                            </form>
-                                            </div>
-                                        </div>
-                                      
-                                    
-                                    </div>
-                                </div>
+<%- include('../partials/_headers'); %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="/home/css/main.css">
+
+<style>
+    .bakiye-page-wrap{
+        padding: 150px 0;
+        background: linear-gradient(180deg, #f6f6f6 0%, #efefef 100%);
+    }
+
+    .bakiye-card{
+        background: #fff;
+        border-radius: 22px;
+        padding: 30px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        margin-bottom: 25px;
+    }
+
+    .bakiye-title{
+        font-size: 34px;
+        font-weight: 800;
+        color: #222;
+        margin-bottom: 10px;
+    }
+
+    .bakiye-subtitle{
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .paket-grid{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(220px,1fr));
+        gap: 18px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .paket-item{
+        border: 2px solid #ececec;
+        border-radius: 18px;
+        background: #fff;
+        padding: 22px;
+        cursor: pointer;
+        transition: all .25s ease;
+        position: relative;
+    }
+
+    .paket-item:hover{
+        transform: translateY(-4px);
+        border-color: #ff8c1a;
+        box-shadow: 0 12px 28px rgba(255,140,26,0.15);
+    }
+
+    .paket-item.active{
+        border-color: #ff8c1a;
+        background: #fff8f1;
+        box-shadow: 0 12px 28px rgba(255,140,26,0.18);
+    }
+
+    .paket-item.popular{
+        border-color: #ff8c1a;
+    }
+
+    .paket-badge{
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: #ff8c1a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 7px 11px;
+        border-radius: 999px;
+    }
+
+    .paket-title{
+        font-size: 22px;
+        font-weight: 800;
+        color: #222;
+        margin-bottom: 8px;
+    }
+
+    .paket-jeton{
+        font-size: 34px;
+        font-weight: 800;
+        color: #ff8c1a;
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .paket-price{
+        font-size: 28px;
+        font-weight: 800;
+        color: #222;
+        margin-bottom: 8px;
+    }
+
+    .paket-desc{
+        color: #666;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 42px;
+    }
+
+    .selected-package-box{
+        background: #f8f8f8;
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 25px;
+        border: 1px solid #eee;
+    }
+
+    .selected-package-label{
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 6px;
+    }
+
+    .selected-package-name{
+        font-size: 28px;
+        font-weight: 800;
+        color: #222;
+        margin-bottom: 6px;
+    }
+
+    .selected-package-text{
+        color: #666;
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+
+    .payment-box{
+        background: #fff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .payment-box .form-control{
+        height: 52px;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        font-size: 15px;
+    }
+
+    .odeme-btn{
+        border: none;
+        background: linear-gradient(135deg, #ff8c1a 0%, #ff6f00 100%);
+        color: #fff;
+        font-weight: 800;
+        border-radius: 14px;
+        padding: 14px 24px;
+        transition: all .25s ease;
+        box-shadow: 0 10px 24px rgba(255,140,26,0.20);
+    }
+
+    .odeme-btn:hover{
+        transform: translateY(-2px);
+    }
+
+    .info-mini{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px,1fr));
+        gap: 15px;
+        margin-top: 22px;
+    }
+
+    .info-mini-box{
+        background: #fff;
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .info-mini-box h5{
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+
+    .info-mini-box p{
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 991px){
+        .bakiye-page-wrap{
+            padding: 110px 0 60px;
+        }
+
+        .paket-grid,
+        .info-mini{
+            grid-template-columns: 1fr;
+        }
+
+        .bakiye-title{
+            font-size: 28px;
+        }
+
+        .selected-package-name{
+            font-size: 24px;
+        }
+    }
+</style>
+
+<div class="bakiye-page-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 m-auto">
+
+                <div class="bakiye-card">
+                    <h1 class="bakiye-title">Jeton & Bakiye Yükleme</h1>
+                    <p class="bakiye-subtitle">
+                        Canlı ihalelerde teklif verebilmek için size uygun paketi seçin. Paket seçtiğinizde ödeme tutarı otomatik doldurulur.
+                    </p>
+
+                    <div class="paket-grid">
+                        <div class="paket-item" data-paket="250" data-jeton="250" data-fiyat="149.90" data-baslik="Başlangıç Paketi">
+                            <div class="paket-title">Başlangıç Paketi</div>
+                            <div class="paket-jeton">250 Jeton</div>
+                            <div class="paket-price">149,90 TL</div>
+                            <div class="paket-desc">İlk kez kullanacaklar ve düşük bütçeyle ihaleye başlamak isteyenler için uygun.</div>
+                        </div>
+
+                        <div class="paket-item popular" data-paket="500" data-jeton="500" data-fiyat="249.90" data-baslik="Avantaj Paketi">
+                            <div class="paket-badge">EN POPÜLER</div>
+                            <div class="paket-title">Avantaj Paketi</div>
+                            <div class="paket-jeton">500 Jeton</div>
+                            <div class="paket-price">249,90 TL</div>
+                            <div class="paket-desc">Daha fazla teklif vermek ve daha uzun süre rekabette kalmak isteyenler için ideal seçim.</div>
+                        </div>
+
+                        <div class="paket-item" data-paket="900" data-jeton="900" data-fiyat="399.90" data-baslik="VIP Paket">
+                            <div class="paket-title">VIP Paket</div>
+                            <div class="paket-jeton">900 Jeton</div>
+                            <div class="paket-price">399,90 TL</div>
+                            <div class="paket-desc">Yoğun teklif veren, avantajı kaçırmak istemeyen ve güçlü ilerlemek isteyen kullanıcılar için.</div>
+                        </div>
+                    </div>
+
+                    <div class="selected-package-box">
+                        <div class="selected-package-label">Seçilen Paket</div>
+                        <div class="selected-package-name" id="selectedPackageName">Henüz paket seçilmedi</div>
+                        <p class="selected-package-text" id="selectedPackageText">
+                            Aşağıdan bir paket seçebilir veya manuel bakiye tutarı girebilirsiniz.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="payment-box">
+                    <div class="card-header" style="background:none;border:none;padding:0 0 15px 0;">
+                        <h3 class="mb-0" style="font-size:28px;font-weight:800;color:#222;">Ödeme Bilgileri</h3>
+                    </div>
+
+                    <form action="odeme" method="GET">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight:700;margin-bottom:8px;">Ödeme Tutarı</label>
+                                <input type="text" name="odemetutari" id="odemeTutari" class="form-control" placeholder="0 TL">
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight:700;margin-bottom:8px;">Ödeme Tipi</label>
+                                <select name="odemetipi" id="odemeTipi" class="form-control">
+                                    <option value="">Ödeme Tipi Seçiniz</option>
+                                    <option value="banka-havalesi">Banka Havalesi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="paket" id="selectedPaketInput" value="">
+                        <input type="hidden" name="jeton" id="selectedJetonInput" value="">
+                        <input type="hidden" name="fiyat" id="selectedFiyatInput" value="">
+
+                        <button type="submit" class="odeme-btn">Ödeme Yap</button>
+                    </form>
+
+                    <div class="info-mini">
+                        <div class="info-mini-box">
+                            <h5>Hızlı Yükleme</h5>
+                            <p>Seçtiğiniz paket ödeme sonrası hesabınıza yansıtılmaya hazır hale gelir.</p>
+                        </div>
+                        <div class="info-mini-box">
+                            <h5>Canlı İhalede Kullanım</h5>
+                            <p>Jetonlarınız canlı ihale ekranında teklif vermek ve giriş bedellerinde kullanılır.</p>
+                        </div>
+                        <div class="info-mini-box">
+                            <h5>Esnek Seçim</h5>
+                            <p>İsterseniz paket seçebilir, isterseniz manuel tutar yazarak farklı işlem akışı kullanabilirsiniz.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-         
-    </main>
 
-    
-    <%- include('../partials/_footers');  %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const paketler = document.querySelectorAll(".paket-item");
+        const selectedPackageName = document.getElementById("selectedPackageName");
+        const selectedPackageText = document.getElementById("selectedPackageText");
+        const odemeTutari = document.getElementById("odemeTutari");
+        const selectedPaketInput = document.getElementById("selectedPaketInput");
+        const selectedJetonInput = document.getElementById("selectedJetonInput");
+        const selectedFiyatInput = document.getElementById("selectedFiyatInput");
+
+        function selectPackage(item) {
+            paketler.forEach(p => p.classList.remove("active"));
+            item.classList.add("active");
+
+            const paket = item.dataset.paket;
+            const jeton = item.dataset.jeton;
+            const fiyat = item.dataset.fiyat;
+            const baslik = item.dataset.baslik;
+
+            selectedPackageName.textContent = baslik;
+            selectedPackageText.textContent = fiyat + " TL ödeme ile hesabınıza " + jeton + " jeton tanımlanacaktır.";
+
+            odemeTutari.value = fiyat;
+            selectedPaketInput.value = paket;
+            selectedJetonInput.value = jeton;
+            selectedFiyatInput.value = fiyat;
+        }
+
+        paketler.forEach(item => {
+            item.addEventListener("click", function () {
+                selectPackage(this);
+            });
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const selectedPaket = params.get("paket");
+
+        if (selectedPaket) {
+            const target = document.querySelector('.paket-item[data-paket="' + selectedPaket + '"]');
+            if (target) {
+                selectPackage(target);
+            }
+        }
+    });
+</script>
+
+</main>
+
+<%- include('../partials/_footers'); %>
