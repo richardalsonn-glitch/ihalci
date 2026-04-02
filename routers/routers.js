@@ -4,7 +4,7 @@ module.exports = function () {
     app.use('/', require('../routers/home/index'));
     app.use('/', require('../routers/admin/index'));
 }
-router.get('/jeton-paketleri', async (req, res) => {
+app.get('/jeton-paketleri', async (req, res) => {
     res.render('home/pages/jeton-paketleri', {
         site,
         user: req.user || null,
@@ -14,14 +14,14 @@ router.get('/jeton-paketleri', async (req, res) => {
     });
 });
 
-router.get('/jeton-paketleri/250-jeton', async (req, res) => {
+app.get('/jeton-paketleri/250-jeton', async (req, res) => {
     res.redirect('/jeton-paketleri');
 });
 
-router.get('/jeton-paketleri/500-jeton', async (req, res) => {
+app.get('/jeton-paketleri/500-jeton', async (req, res) => {
     res.redirect('/jeton-paketleri');
 });
 
-router.get('/jeton-paketleri/900-jeton', async (req, res) => {
+app.get('/jeton-paketleri/900-jeton', async (req, res) => {
     res.redirect('/jeton-paketleri');
 });
