@@ -7244,20 +7244,252 @@ p.checkout-coupon input[type=text]::placeholder {
 .yorumuyazan, .degerlendirmeyazisi{
   color: #828282;
 }
+.submenu li a i,
+.mobile-custom-sub li a i {
+    width: 20px;
+    margin-right: 8px;
+    color: #ff8c1a;
+}
 
-               *     *   ***   *** *  *  *  *
-            *            ***   ***            *
-         *                  *****                *
-      *                 *******                 *
-     *                  *******                  *
-     *                   *****                   *
-      *                    ***                    *
-       *                                         *
-        *                                       *
-          *                                   *
-            *                               *
-               *                         *
-                  *                   *
-                      *           *
-                          *   *
-                              *
+.jeton-page {
+    background: linear-gradient(180deg, #f6f6f6 0%, #efefef 100%);
+    padding: 60px 0 70px;
+}
+
+.jeton-hero {
+    background: linear-gradient(135deg, #1f1f1f 0%, #2b2b2b 50%, #ff8c1a 140%);
+    border-radius: 22px;
+    padding: 42px;
+    color: #fff;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.18);
+    margin-bottom: 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+.jeton-hero:before {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+}
+
+.jeton-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+.jeton-hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 0;
+}
+
+.jeton-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.jeton-chip {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.jeton-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.jeton-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    position: relative;
+    transition: all .25s ease;
+    border: 2px solid transparent;
+}
+
+.jeton-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.12);
+}
+
+.jeton-card.popular {
+    border-color: #ff8c1a;
+    transform: scale(1.02);
+}
+
+.jeton-card.vip {
+    background: linear-gradient(180deg, #1f1f1f 0%, #272727 100%);
+    color: #fff;
+}
+
+.jeton-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: #ff8c1a;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 999px;
+}
+
+.jeton-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.jeton-subtitle {
+    color: #777;
+    margin-bottom: 20px;
+    min-height: 44px;
+}
+
+.jeton-card.vip .jeton-subtitle,
+.jeton-card.vip .jeton-feature li,
+.jeton-card.vip .jeton-price small {
+    color: rgba(255,255,255,0.82);
+}
+
+.jeton-count {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.jeton-price {
+    margin: 18px 0 20px;
+    font-size: 34px;
+    font-weight: 800;
+    color: #ff8c1a;
+}
+
+.jeton-card.vip .jeton-price {
+    color: #ffb14d;
+}
+
+.jeton-price small {
+    display: block;
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.jeton-feature {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+.jeton-feature li {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 15px;
+}
+
+.jeton-feature li i {
+    color: #ff8c1a;
+    margin-right: 8px;
+    width: 18px;
+}
+
+.jeton-card.vip .jeton-feature li i {
+    color: #ffb14d;
+}
+
+.jeton-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all .2s ease;
+    border: none;
+}
+
+.jeton-btn.primary {
+    background: #ff8c1a;
+    color: #fff;
+}
+
+.jeton-btn.dark {
+    background: #222;
+    color: #fff;
+}
+
+.jeton-btn.light {
+    background: #fff;
+    color: #222;
+}
+
+.jeton-btn:hover {
+    transform: translateY(-2px);
+    color: inherit;
+}
+
+.jeton-info-grid {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.jeton-info-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.jeton-info-box h4 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.jeton-info-box p {
+    color: #666;
+    margin: 0;
+    line-height: 1.7;
+}
+
+@media (max-width: 991px) {
+    .jeton-grid,
+    .jeton-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jeton-hero {
+        padding: 28px;
+    }
+
+    .jeton-hero h1 {
+        font-size: 30px;
+    }
+
+    .jeton-card.popular {
+        transform: none;
+    }
+}
