@@ -301,11 +301,10 @@
                         <div class="header-wallet-wrap">
                             <div class="header-balance-box header-balance-tl">
                                 💰 <% if(cuzdan){ %><%- cuzdan.bakiye %><% } else { %>0<% } %> TL
-                            </div>
-
-                            <div class="header-balance-box header-balance-jeton">
-                                🪙 <% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %> Jeton
-                            </div>
+                           </div>
+                           <div class="header-balance-box header-balance-jeton" id="headerJetonBox">
+                           🪙 <span id="headerJetonCount"><% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %></span> Jeton
+                           </div>
 
                             <a href="/bakiye" class="header-balance-box header-balance-link">
                                 + Yükle
@@ -617,11 +616,10 @@
             <div class="mobile-offcanvas-wallet">
                 <div class="header-balance-box header-balance-tl">
                     💰 <% if(cuzdan){ %><%- cuzdan.bakiye %><% } else { %>0<% } %> TL
-                </div>
-
-                <div class="header-balance-box header-balance-jeton">
-                    🪙 <% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %> Jeton
-                </div>
+               </div>
+              <div class="header-balance-box header-balance-jeton" id="mobileHeaderJetonBox">
+             🪙 <span id="mobileHeaderJetonCount"><% if(cuzdan && cuzdan.jeton){ %><%- cuzdan.jeton %><% } else { %>840<% } %></span> Jeton
+               </div>
 
                 <a href="/bakiye" class="header-balance-box header-balance-link">
                     + Bakiye Yükle
