@@ -7492,4 +7492,24 @@ p.checkout-coupon input[type=text]::placeholder {
     .jeton-card.popular {
         transform: none;
     }
+.blink-badge {
+    animation: blinkBadge 1.6s infinite ease-in-out;
+}
+
+@keyframes blinkBadge {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255,140,26,0.0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 18px rgba(255,140,26,0.35);
+        opacity: 0.92;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255,140,26,0.0);
+        opacity: 1;
+    }
 }
