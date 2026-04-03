@@ -299,25 +299,26 @@
 
                         <!-- YENİ BAKİYE KUTUSU -->
                         <div class="header-wallet-wrap">
-                   <div class="header-balance-box header-balance-tl" id="headerBakiyeBox">
+                  <div class="header-balance-box header-balance-tl" id="headerBakiyeBox">
     💰 <span id="headerBakiyeCount">
-        <% if(user && user.uyebakiye){ %>
+        <% if(user && typeof user.uyebakiye !== 'undefined'){ %>
             <%- user.uyebakiye %>
         <% } else { %>
             0
         <% } %>
     </span> TL
 </div>
+
 <div class="header-balance-box header-balance-jeton" id="headerJetonBox">
-                                  🪙 <span id="headerJetonCount">
-                                   <% if(user && user.jeton){ %>
-                                 <%- user.jeton %>
-                                   <% } else { %>
-                                       0
-                                      <% } %>
-                               </span> Jeton
-                                 </div>
-                            <a href="/bakiye" class="header-balance-box header-balance-link">
+    🪙 <span id="headerJetonCount">
+        <% if(user && typeof user.jeton !== 'undefined'){ %>
+            <%- user.jeton %>
+        <% } else { %>
+            0
+        <% } %>
+    </span> Jeton
+</div>
+<a href="/bakiye" class="header-balance-box header-balance-link">
                                 + Yükle
                             </a>
                         </div>
