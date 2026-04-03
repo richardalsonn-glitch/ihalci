@@ -242,5 +242,17 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(guncelle, 5000);
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const savedJeton = localStorage.getItem("liveJetonCount");
+    if (savedJeton) {
+        const headerJeton = document.getElementById("headerJetonCount");
+        const mobileJeton = document.getElementById("mobileHeaderJetonCount");
+
+        if (headerJeton) headerJeton.textContent = savedJeton;
+        if (mobileJeton) mobileJeton.textContent = savedJeton;
+    }
+});
+</script>
    </body>
 </html>
