@@ -176,5 +176,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    async function guncelBakiyeJetonGetir() {
+        try {
+            const res = await fetch('/api/jeton');
+            const data = await res.json();
+
+            if (!data || data.success === false) return;
+
+            const headerJeton = document.getElementById('headerJetonCount');
+            const mobileJeton = document.getElementById('mobileHeaderJetonCount');
+            const headerBakiye = document.getElementById('headerBakiyeCount');
+            const mobileBakiye = document.getElementById('mobileHeaderBakiyeCount');
+
+            if (headerJeton) headerJeton.textContent = data.jeton ?? 0;
+            if (mobileJeton) mobileJeton.textContent = data.jeton ?? 0;
+
+            if (headerBakiye) headerBakiye.textContent = data.bakiye ?? 0;
+            if (mobileBakiye) mobileBakiye.textContent = data.bakiye ?? 0;
+
+        } catch (err) {
+            console.log('Header bakiye/jeton güncelleme hatası:', err);
+        }
+    }
+
+    guncelBakiyeJetonGetir();
+    setInterval(guncelBakiyeJetonGetir, 5000);
+});
+</script>
    </body>
 </html>
