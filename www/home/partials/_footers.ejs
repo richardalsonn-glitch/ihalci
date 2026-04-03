@@ -206,5 +206,41 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(guncelBakiyeJetonGetir, 5000);
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    async function guncelle() {
+        try {
+            const res = await fetch('/api/jeton');
+            const data = await res.json();
+
+            if (!data || data.success === false) return;
+
+            // Masaüstü
+            const headerJeton = document.getElementById('headerJetonCount');
+            const headerBakiye = document.getElementById('headerBakiyeCount');
+
+            // Mobil
+            const mobileJeton = document.getElementById('mobileHeaderJetonCount');
+            const mobileBakiye = document.getElementById('mobileHeaderBakiyeCount');
+
+            if (headerJeton) headerJeton.textContent = data.jeton ?? 0;
+            if (headerBakiye) headerBakiye.textContent = data.bakiye ?? 0;
+
+            if (mobileJeton) mobileJeton.textContent = data.jeton ?? 0;
+            if (mobileBakiye) mobileBakiye.textContent = data.bakiye ?? 0;
+
+        } catch (err) {
+            console.log("Jeton API hatası:", err);
+        }
+    }
+
+    // Sayfa açılınca
+    guncelle();
+
+    // 5 saniyede bir otomatik güncelle
+    setInterval(guncelle, 5000);
+});
+</script>
    </body>
 </html>
