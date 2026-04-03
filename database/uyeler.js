@@ -4,6 +4,7 @@ const uyeler = new Schema({
     uyemail:{type:String, unique:true, required:true},
     uyecinsiyet:{type:String},
     uyebakiye:{type:Number, default:0},
+    jeton:{type:Number, default:0},
     uyeadres: { type: String },
     uyedurum:{type:Boolean, default:false},
     uyesifre:{type:String},
