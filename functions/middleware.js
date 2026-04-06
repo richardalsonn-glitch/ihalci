@@ -91,21 +91,20 @@ module.exports = function () {
         res.locals.uyeadi = req.flash('uyeadi');
         next();
     });
-
-    app.use(async (req, res, next) => {
-        try {
-            if (req.user && req.user._id) {
-                const freshUser = await uyelerModel.findById(req.user._id).lean();
-                res.locals.user = freshUser || null;
-            } else {
-                res.locals.user = null;
-            }
-        } catch (err) {
-            console.log('res.locals.user middleware hatası:', err);
+  app.use(async (req, res, next) => {
+    try {
+        if (req.session.user && req.session.user._id) {
+            const freshUser = await uyelerModel.findById(req.session.user._id).lean();
+            res.locals.user = freshUser || null;
+        } else {
             res.locals.user = null;
         }
-        next();
-    });
+    } catch (err) {
+        console.log('user middleware hata:', err);
+        res.locals.user = null;
+    }
+    next();
+});
 }
 
  
