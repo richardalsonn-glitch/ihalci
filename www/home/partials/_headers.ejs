@@ -300,8 +300,7 @@
                         <!-- YENİ BAKİYE KUTUSU -->
                         <div class="header-wallet-wrap">
           <div class="header-balance-box header-balance-tl" id="headerBakiyeBox">
-    💰 <span id="headerBakiyeCount">500</span> TL
-</div>
+    💰 <span id="headerBakiyeCount">0</span> TL
         <% if(user && typeof user.uyebakiye !== 'undefined'){ %>
             <%- user.uyebakiye %>
         <% } else { %>
@@ -311,8 +310,7 @@
 </div>
 
 <div class="header-balance-box header-balance-jeton" id="headerJetonBox">
-    🪙 <span id="headerJetonCount">750</span> Jeton
-</div>
+    🪙 <span id="headerJetonCount">0</span> Jeton
         <% if(user && typeof user.jeton !== 'undefined'){ %>
             <%- user.jeton %>
         <% } else { %>
