@@ -1,4 +1,4 @@
-const kategoriler =  Schema({
+const kategoriler = new Schema({
     kategoriadi:{ type:String },
     kategoriaciklama:{ type:String },
     kategoriurl: { type:String },
