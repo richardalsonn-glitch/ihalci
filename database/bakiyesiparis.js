@@ -3,8 +3,8 @@ const bakiyesiparis = new Schema({
     bakiyedurum:{type:Boolean, default:false},
     uyeId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'cuzdan',
+        ref:'uyeler',
     }
-}, {collection:'bakiye', bakiye});
+}, {collection:'bakiye'});
 
-module.expots = mongoDB.model('bakiye', bakiyesiparis)
+module.exports = mongoDB.model('bakiye', bakiyesiparis);
