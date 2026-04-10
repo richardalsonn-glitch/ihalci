@@ -1,9 +1,36 @@
 /**
  * Ana Router — tüm route'ları buradan bağla
  */
-const ayarlar = require('./home/functions');
+const ayarlar = require('./home/functions');   // ← Bu dosyanın var olduğundan emin ol
 
 module.exports = function (app) {
+    // Ana route dosyaları (eğer varsa)
+    // app.use('/', require('./home/index'));   // ← bu satırlar varsa yorum satırı yap veya sil
+    // app.use('/', require('./admin/index'));
+
+    // ── İHALE SAYFALAR ──────────────────────────────────────────
+    app.get('/ihaleler', async (req, res) => {
+        try {
+            const { kategorilerListesi, altKategorilerListesi, cuzdan, sites, ozellikler } = await ayarlar.tumfonksiyonlar(req);
+            const urunModel = require('../database/urunler');
+            const urunler = await urunModel.find({ ihaledurumu: true }).sort({ ihaleeklemetarihi: -1 });
+
+            res.render('home/pages/ihaleler', {
+                user: req.user, 
+                kategoriler: kategorilerListesi,
+                altkategoriler: altKategorilerListesi, 
+                cuzdan, 
+                urunler, 
+                site: sites, 
+                anasayfa: ozellikler, 
+                baslik: 'Tüm İhaleler'
+            });
+        } catch (err) { 
+            console.error(err); 
+            res.redirect('/'); 
+        }
+    });
+};
 
     // Ana route dosyaları
     app.use('/', require('./home/index'));
