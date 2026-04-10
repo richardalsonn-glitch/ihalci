@@ -1,0 +1,133 @@
+cat > /home/claude/ihalci-fixed/www/home/pages/ihaleler.ejs << 'EJSEOF'
+<%- include('../partials/_headers'); %>
+
+<style>
+.ihale-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; padding: 30px 0; }
+.ihale-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.09); overflow: hidden; transition: transform .2s, box-shadow .2s; }
+.ihale-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.14); }
+.ihale-card img { width: 100%; height: 200px; object-fit: cover; }
+.ihale-card-body { padding: 18px; }
+.ihale-card-title { font-size: 17px; font-weight: 700; color: #222; margin-bottom: 10px; }
+.ihale-badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-canli { background: #ff4444; color: #fff; }
+.badge-bekliyor { background: #ff8c1a; color: #fff; }
+.badge-bitti { background: #aaa; color: #fff; }
+.ihale-price { font-size: 22px; font-weight: 800; color: #ff8c1a; }
+.ihale-info { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin: 10px 0; }
+.ihale-jeton { background: #fff3e0; border-radius: 8px; padding: 6px 12px; font-size: 13px; color: #e65100; font-weight: 600; }
+.ihale-btn { display: block; width: 100%; padding: 12px; background: #263c97; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; transition: background .2s; text-decoration: none; }
+.ihale-btn:hover { background: #ff8c1a; color: #fff; }
+.countdown-box { display: flex; gap: 6px; justify-content: center; margin: 10px 0; }
+.countdown-item { background: #263c97; color: #fff; border-radius: 6px; padding: 6px 10px; text-align: center; min-width: 48px; }
+.countdown-item .num { font-size: 20px; font-weight: 800; display: block; }
+.countdown-item .lbl { font-size: 9px; display: block; opacity: .8; }
+.page-hero { background: linear-gradient(135deg, #263c97, #1a2a6c); color: #fff; padding: 48px 0 32px; margin-bottom: 24px; }
+.page-hero h1 { font-size: 36px; font-weight: 800; }
+.page-hero p { opacity: .8; }
+.filter-bar { background: #fff; border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.filter-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid #e0e0e0; background: #fff; font-weight: 600; cursor: pointer; transition: all .2s; font-size: 14px; }
+.filter-btn.active, .filter-btn:hover { background: #263c97; color: #fff; border-color: #263c97; }
+.empty-state { text-align: center; padding: 80px 20px; color: #666; }
+.empty-state i { font-size: 60px; margin-bottom: 20px; color: #ddd; }
+</style>
+
+<div class="page-hero">
+  <div class="container">
+    <h1><%= typeof baslik !== 'undefined' ? baslik : 'İhaleler' %></h1>
+    <p>Binlerce ürün ihaleyle çok uygun fiyatlara sizin olabilir!</p>
+  </div>
+</div>
+
+<div class="container mb-60">
+  <div class="filter-bar">
+    <a href="/ihaleler" class="filter-btn <%= typeof baslik !== 'undefined' && baslik.includes('Tüm') ? 'active' : '' %>">Tümü</a>
+    <a href="/canli-ihaleler" class="filter-btn <%= typeof baslik !== 'undefined' && baslik.includes('Canlı') ? 'active' : '' %>">🔴 Canlı</a>
+    <a href="/yaklasan-ihaleler" class="filter-btn <%= typeof baslik !== 'undefined' && baslik.includes('Yaklaşan') ? 'active' : '' %>">⏳ Yaklaşan</a>
+    <a href="/biten-ihaleler" class="filter-btn <%= typeof baslik !== 'undefined' && baslik.includes('Biten') ? 'active' : '' %>">✅ Biten</a>
+  </div>
+
+  <% if (!urunler || urunler.length === 0) { %>
+  <div class="empty-state">
+    <i class="fal fa-gavel"></i>
+    <h4>Şu an bu kategoride ihale bulunmuyor</h4>
+    <p>Yakında yeni ihaleler eklenecek.</p>
+    <a href="/ihaleler" class="ihale-btn" style="max-width:220px;margin:20px auto;">Tüm İhalelere Bak</a>
+  </div>
+  <% } else { %>
+  <div class="ihale-grid">
+    <% urunler.forEach(function(urun) { 
+      const simdi = new Date();
+      const bitis = new Date(urun.ihalebitistarihi);
+      const baslangic = new Date(urun.ihalebaslangictarihi);
+      const canli = urun.ihaledurumu && urun.ihaleBasladi && bitis > simdi && baslangic <= simdi;
+      const bekliyor = urun.ihaledurumu && !urun.ihaleBasladi;
+      const bitti = !urun.ihaledurumu || bitis < simdi;
+    %>
+    <div class="ihale-card">
+      <a href="/ihale/<%= urun.ihaleurl %>">
+        <% if (urun.urungorsel1) { %>
+          <img src="/urungorselleri/<%= urun.urungorsel1 %>" alt="<%= urun.urunadi %>" loading="lazy">
+        <% } else { %>
+          <div style="width:100%;height:200px;background:linear-gradient(135deg,#263c97,#ff8c1a);display:flex;align-items:center;justify-content:center;">
+            <i class="fal fa-gavel" style="font-size:60px;color:rgba(255,255,255,.4);"></i>
+          </div>
+        <% } %>
+      </a>
+      <div class="ihale-card-body">
+        <div style="margin-bottom:8px;">
+          <% if (canli) { %><span class="ihale-badge badge-canli">🔴 CANLI</span>
+          <% } else if (bekliyor) { %><span class="ihale-badge badge-bekliyor">⏳ Bekliyor</span>
+          <% } else { %><span class="ihale-badge badge-bitti">✅ Bitti</span><% } %>
+        </div>
+
+        <div class="ihale-card-title"><a href="/ihale/<%= urun.ihaleurl %>" style="color:inherit;"><%= urun.urunadi %></a></div>
+
+        <div class="ihale-price"><%= urun.anlikFiyat || urun.baslangicfiyati || 1 %> TL</div>
+
+        <div class="ihale-info">
+          <span>🎯 <strong><%= urun.katilimcilar ? urun.katilimcilar.length : 0 %></strong>/<%= urun.minKatilimci || 10 %> Katılımcı</span>
+          <span>🏷️ Başlangıç: <strong><%= urun.baslangicfiyati || 1 %> TL</strong></span>
+        </div>
+
+        <div class="ihale-jeton" style="margin-bottom:12px;">
+          🪙 Giriş: <strong><%= urun.minimumJeton || 300 %></strong> Jeton
+        </div>
+
+        <% if (canli) { %>
+        <div class="countdown-box" data-bitis="<%= urun.ihalebitistarihi %>">
+          <div class="countdown-item"><span class="num cd-saat">00</span><span class="lbl">SAAT</span></div>
+          <div class="countdown-item"><span class="num cd-dakika">00</span><span class="lbl">DAK</span></div>
+          <div class="countdown-item"><span class="num cd-saniye">00</span><span class="lbl">SN</span></div>
+        </div>
+        <% } %>
+
+        <a href="/ihale/<%= urun.ihaleurl %>" class="ihale-btn">
+          <% if (bitti) { %>Detayı Gör
+          <% } else if (bekliyor) { %>Katılımcıları Bekliyor
+          <% } else { %>İhaleye Katıl →<% } %>
+        </a>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
+</div>
+
+<script>
+document.querySelectorAll('.countdown-box[data-bitis]').forEach(function(box) {
+  const bitis = new Date(box.getAttribute('data-bitis'));
+  function guncelle() {
+    const kalan = bitis - new Date();
+    if (kalan <= 0) { box.innerHTML = '<span style="color:#ff4444;font-weight:700;">İhale Bitti!</span>'; return; }
+    const s = Math.floor(kalan/3600000), d = Math.floor((kalan%3600000)/60000), sn = Math.floor((kalan%60000)/1000);
+    box.querySelector('.cd-saat').textContent = String(s).padStart(2,'0');
+    box.querySelector('.cd-dakika').textContent = String(d).padStart(2,'0');
+    box.querySelector('.cd-saniye').textContent = String(sn).padStart(2,'0');
+  }
+  guncelle();
+  setInterval(guncelle, 1000);
+});
+</script>
+
+<%- include('../partials/_footers'); %>
+EJSEOF
