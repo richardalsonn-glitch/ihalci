@@ -43,12 +43,23 @@ const urunler = new Schema({
     ozellik3:{type:String, default:''},
     ozellik4:{type:String, default:''},
     ozellik5:{type:String, default:''},
+    // Jeton sistemi
+    minimumJeton: {type:Number, default:300},        // ürüne giriş için min jeton
+    anlikFiyat: {type:Number, default:1},             // her teklif sonrası artan fiyat (max +10 TL)
+    maxFiyatArtis: {type:Number, default:10},         // bir teklifte fiyat max bu kadar artar
+
+    // Katılımcı kontrolü
+    katilimcilar: [{type: mongoose.Schema.Types.ObjectId, ref:'uyeler'}],
+    minKatilimci: {type:Number, default:10},          // ihale başlamak için min katılımcı
+    ihaleBasladi: {type:Boolean, default:false},      // 10 kişi dolmadan başlamaz
+
     populerurun: {type:Boolean, default: false},
     kazananUyeId: { 
         type: mongoose.Schema.Types.ObjectId,
         ref: 'uyeler',
         default: null
-      },    ihaledurumu:{type:Boolean, default:true},
+    },
+    ihaledurumu:{type:Boolean, default:true},
     ihaleurl:{type:String},
     ihaleeklemetarihi:{type:Date, default:moment().format('YYYY-MM-DD HH:mm:ss')},
     ihalebaslangictarihi:{type:Date},
