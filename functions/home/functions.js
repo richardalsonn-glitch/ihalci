@@ -12,35 +12,36 @@ function startAuctionTimer() {
   setInterval(async () => { 
     try {
       const suankiZaman = new Date();
-
-      // İhalesi devam eden ürünleri bul
-      const ihaleDevamEdenUrunler = await urunler.find({ ihalebitistarihi: { $lt: suankiZaman }, ihaledurumu: true });
+      // Süresi dolmuş ve hâlâ aktif olan ihaleleri bul
+      const ihaleDevamEdenUrunler = await urunler.find({ 
+        ihalebitistarihi: { $lt: suankiZaman }, 
+        ihaledurumu: true 
+      });
       
       for (let i = 0; i < ihaleDevamEdenUrunler.length; i++) {
         const urun = ihaleDevamEdenUrunler[i];
 
-        // İhale bitiş süresi dolmuş mu kontrol et
-        if (urun.ihalebitistarihi < suankiZaman) {
-          // En yüksek teklifi bul
-          const enYuksekTeklif = await Teklif.findOne({ urunId: urun._id }).sort({ teklif: -1 }).exec();
+        // En yüksek jeton teklifini bul (jetonMiktari alanına göre)
+        const enYuksekTeklif = await Teklif.findOne({ urunId: urun._id, teklifdurum: true })
+          .sort({ jetonMiktari: -1 })
+          .exec();
 
-          if (enYuksekTeklif) {
-            // Ürünün bilgilerini güncelle
-            await urunler.findByIdAndUpdate(urun._id, {
-              kazananUyeId: enYuksekTeklif.uyeId,
-              ihaledurumu: false
-            }).exec();
-            console.log('İhale tamamlandı. Kazanan kullanıcı:', enYuksekTeklif.uyeId);
-            
-          } else {
-            console.log('İhalede teklif veren kullanıcı bulunamadı.');
-           }
+        if (enYuksekTeklif) {
+          await urunler.findByIdAndUpdate(urun._id, {
+            kazananUyeId: enYuksekTeklif.uyeId,
+            ihaledurumu: false
+          }).exec();
+          console.log('✅ İhale tamamlandı. Kazanan:', enYuksekTeklif.uyeId, '| Fiyat:', urun.anlikFiyat || urun.baslangicfiyati);
+        } else {
+          // Teklif gelmedi, ihaleyi kapat
+          await urunler.findByIdAndUpdate(urun._id, { ihaledurumu: false }).exec();
+          console.log('⚠️ İhale teklif gelmeden kapandı:', urun.urunadi);
         }
       }
     } catch (err) {
-      console.log(err);
+      console.log('Timer hatası:', err);
     }
-  }, 1000); // Her saniye kontrol et
+  }, 5000); // 5 saniyede bir kontrol et (performans için 1000'den arttırıldı)
 }
 
 // İhale sürelerini kontrol etmek için zamanlayıcıyı başlat
@@ -83,75 +84,11 @@ exports.yorumekle = async (req,res) =>{
 }
 
 
- exports.teklifver = async (req, res) => {
-      errors = validationResult(req);
-
-      if (!errors.isEmpty()) {
-        const errormessage = errors.array().map(error => error.msg);
-        return res.status(400).json({ errors: errormessage });
-      }
-
-      try {
-        const uyeId = req.user.id;
-        const { urunId, teklifmiktari } = req.body;
-
-        const urun = await urunler.findById(urunId);
-        if (urun && teklifmiktari < urun.baslangicfiyati) {
-          return res.status(400).json({ errors: ["Başlangıç fiyatının altında bir teklif veremezsiniz."] });
-        }
-
-        const sonTeklif = await Teklif.findOne({ urunId }).sort({ teklif: -1 });
-
-        if (sonTeklif) {
-          if (sonTeklif.uyeId.toString() === uyeId && sonTeklif.tekrarteklif === true) {
-            return res.status(400).json({ errors: ["Başkası Teklif Vermeden Teklif Veremezsiniz.."] });
-          }
-          if (sonTeklif.teklif >= teklifmiktari) {
-            return res.status(400).json({ errors: [`Eski Kullanıcıdan Daha Düşük Teklif Veremezsiniz Teklifiniz: ${teklifmiktari} Den Yüksek Olmalıdır.`] });
-          }
-          const kullanicicuzdan = await Cuzdan.findOne({ uyeId });
-          if (kullanicicuzdan.bakiye === 0) {
-            return res.status(400).json({ errors: ["Bakiyeniz yok, lütfen bakiye ekleyiniz."] });
-          } else {
-            const oncekiKullaniciCuzdan = await Cuzdan.findOne({ uyeId: sonTeklif.uyeId });
-            oncekiKullaniciCuzdan.bakiye += sonTeklif.teklif;
-            await oncekiKullaniciCuzdan.save();
-            sonTeklif.teklifdurum = false;
-            await sonTeklif.save();
-          }
-        }
-
-        const yeniTeklif = new Teklif({
-          teklif: teklifmiktari,
-          uyeId,
-          urunId,
-          teklifdurum: true,
-          tekrarteklif: true
-        });
-
-         const kullanicicuzdan = await Cuzdan.findOne({ uyeId });
-        if (kullanicicuzdan && kullanicicuzdan.bakiye >= teklifmiktari) {
-          kullanicicuzdan.bakiye -= teklifmiktari;
-          await kullanicicuzdan.save();
-          await yeniTeklif.save(); 
-               // İhale bitişine 10 dakika kala ve yeni teklif verildiyse süreyi uzat
-      const bitisZamani = new Date(urun.ihalebitistarihi);
-      const simdikiZaman = new Date();
-      const zamanFarki = bitisZamani.getTime() - simdikiZaman.getTime();
-      const dakikaFarki = Math.floor(zamanFarki / (1000 * 60));
-
-      if (dakikaFarki <= 10) {
-        urun.ihalebitistarihi = new Date(bitisZamani.getTime() + (10 * 60 * 1000)); // Süreyi 10 dakika uzat
-        await urun.save();
-      }
-          return res.status(200).json({ success: ["Tebrikler, başarıyla teklif verdiniz. Teklifiniz bakiyenizden düştü."] });
-        } else {
-          return res.status(400).json({ errors: ["Bakiyeniz yetersiz, lütfen teklif vermeden önce bakiye ekleyiniz."] });
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+// Teklif ver — artık /api/teklif-ver endpoint'i kullanılıyor (routers.js içinde)
+// Bu fonksiyon geriye dönük uyumluluk için burada bırakıldı
+exports.teklifver = async (req, res) => {
+    return res.status(400).json({ errors: ['Lütfen /api/teklif-ver endpoint\'ini kullanınız'] });
+};
 
 
 exports.urunkaydet = async (req,res,next) => {
@@ -351,4 +288,3 @@ exports.uyegiris = (req, res, next) => {
         });
     })(req,res,next);
 };
-
